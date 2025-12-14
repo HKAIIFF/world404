@@ -1,582 +1,373 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World404 - 多元宇宙主題樂園</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>World404 | Infinite Interaction Universe</title>
+    <!-- 使用 Tailwind CDN 以支持最新的 CSS 特性 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Syncopate:wght@400;700&family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #3498db;
-            --secondary: #8e44ad;
-            --accent: #00ff9d;
-            --gold: #ffd700;
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff0055;
+            --neon-purple: #bc13fe;
+            --neon-green: #00ff9d;
+            --neon-gold: #ffd700;
+            --dark-bg: #030305;
+            --panel-bg: rgba(10, 10, 16, 0.90);
+            --grid-line: rgba(0, 243, 255, 0.05);
         }
-        
+
+        /* 基础设置 */
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: #0a0a0a;
-            color: #ffffff;
+            font-family: 'Rajdhani', 'Noto Sans TC', sans-serif;
+            background-color: var(--dark-bg);
+            color: #fff;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(142, 68, 173, 0.1) 0%, transparent 20%);
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center top;
         }
         
-        .logo-font {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 800;
-            letter-spacing: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            position: relative;
-            display: inline-block;
-            text-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
-            animation: logoGlow 3s ease-in-out infinite alternate;
+        /* 字体 */
+        .font-cyber { font-family: 'Syncopate', sans-serif; }
+        .font-tech { font-family: 'Rajdhani', sans-serif; }
+
+        /* 强制覆盖层级，确保移动端菜单可点击 */
+        #mobileMenuContainer {
+            z-index: 2147483647 !important;
         }
-        
-        @keyframes logoGlow {
-            0% { text-shadow: 0 0 10px rgba(0, 255, 157, 0.3); }
-            100% { text-shadow: 0 0 25px rgba(0, 255, 157, 0.6), 0 0 35px rgba(52, 152, 219, 0.4); }
-        }
-        
-        .gradient-text {
-            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-        }
-        
-        .accent-bg {
-            background: rgba(0, 255, 157, 0.1);
-            border: 1px solid rgba(0, 255, 157, 0.2);
-        }
-        
-        .card {
-            background-color: rgba(26, 32, 44, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-        
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 255, 157, 0.2);
-            border-color: rgba(0, 255, 157, 0.3);
-        }
-        
-        .navbar {
-            background-color: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 255, 157, 0.1);
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            transition: all 0.3s ease;
-            border: none;
-            font-weight: 600;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.4);
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-        
-        .btn-secondary:hover {
-            background-color: rgba(0, 255, 157, 0.1);
-            transform: translateY(-3px);
-        }
-        
-        .hero {
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            min-height: 100vh;
-        }
-        
-        .hero:before {
-            content: "";
-            position: absolute;
-            top: 0;
+
+        /* 扫描线效果 */
+        .scanline {
+            position: fixed;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 25% 75%, rgba(52, 152, 219, 0.2) 0%, transparent 40%),
-                radial-gradient(circle at 75% 25%, rgba(142, 68, 173, 0.2) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(0, 255, 157, 0.15) 0%, transparent 50%);
-            z-index: 2;
-            animation: lightGlow 12s ease-in-out infinite alternate;
-        }
-        
-        @keyframes lightGlow {
-            0% { 
-                opacity: 0.4;
-            }
-            100% { 
-                opacity: 0.7;
-            }
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 3;
-        }
-        
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(45deg, rgba(52, 152, 219, 0.15) 0%, transparent 70%),
-                linear-gradient(-45deg, rgba(142, 68, 173, 0.15) 0%, transparent 70%),
-                linear-gradient(135deg, rgba(0, 255, 157, 0.1) 0%, transparent 70%),
-                radial-gradient(circle at 30% 40%, rgba(52, 152, 219, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 70% 60%, rgba(142, 68, 173, 0.2) 0%, transparent 50%),
-                #0f0f23;
-            animation: subtlePan 45s infinite linear;
-        }
-        
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.1) 50%, rgba(10,10,10,0.4) 100%);
-            z-index: 1;
-        }
-        
-        @keyframes subtlePan {
-            0% { 
-                background-position: 0% 0%, 100% 100%, 50% 50%, 30% 40%, 70% 60%;
-            }
-            50% { 
-                background-position: 100% 50%, 0% 50%, 100% 0%, 40% 30%, 60% 70%;
-            }
-            100% { 
-                background-position: 0% 0%, 100% 100%, 50% 50%, 30% 40%, 70% 60%;
-            }
-        }
-        
-        .floating {
-            animation: floating 6s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .animate-fade-in {
-            animation: fadeIn 1s ease-in-out forwards;
-            opacity: 0;
-        }
-        
-        .animate-slide-up {
-            animation: slideUp 0.8s ease-in-out forwards;
-            opacity: 0;
-        }
-        
-        .animate-slide-right {
-            animation: slideRight 0.8s ease-in-out forwards;
-            opacity: 0;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        @keyframes slideRight {
-            from { transform: translateX(-50px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        .data-stream {
-            position: absolute;
-            height: 100px;
-            width: 2px;
-            background: linear-gradient(to bottom, transparent, var(--accent), var(--secondary), transparent);
-            z-index: 0;
-            animation: dataStream 2s linear infinite;
-            opacity: 0.3;
-        }
-        
-        @keyframes dataStream {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100vh); }
-        }
-        
-        .ai-element {
-            position: absolute;
-            background-color: rgba(52, 152, 219, 0.1);
-            border: 1px solid rgba(52, 152, 219, 0.3);
-            backdrop-filter: blur(5px);
-            padding: 10px;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 12px;
-            color: var(--accent);
-            z-index: 3;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 255, 255, 0.02) 51%);
+            background-size: 100% 4px;
             pointer-events: none;
-            box-shadow: 0 0 15px rgba(0, 255, 157, 0.1);
+            z-index: 999;
+        }
+
+        /* HUD 风格容器 */
+        .hud-panel {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            clip-path: polygon(
+                0 10px, 10px 0, 
+                calc(100% - 10px) 0, 100% 10px, 
+                100% calc(100% - 10px), calc(100% - 10px) 100%, 
+                10px 100%, 0 calc(100% - 10px)
+            );
+            transition: all 0.3s ease;
+        }
+
+        .hud-panel:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.15);
+        }
+
+        /* HUD 角落装饰 */
+        .hud-corner::before, .hud-corner::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border: 2px solid var(--neon-cyan);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        .hud-corner::before { top: 0; left: 0; border-right: none; border-bottom: none; }
+        .hud-corner::after { bottom: 0; right: 0; border-left: none; border-top: none; }
+        
+        .hud-panel:hover .hud-corner::before { width: 100%; height: 100%; opacity: 0.1; background: var(--neon-cyan); }
+
+        /* 按钮样式 */
+        .btn-cyber {
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
         }
         
-        .mobile-menu {
-            display: none;
+        .btn-cyber:hover {
+            background: var(--neon-cyan);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-cyan);
+            text-shadow: none;
+        }
+
+        .btn-gold {
+            border-color: var(--neon-gold);
+            color: var(--neon-gold);
+        }
+        .btn-gold:hover {
+            background: var(--neon-gold);
+            color: #000;
+            box-shadow: 0 0 20px var(--neon-gold);
+        }
+
+        /* 故障文字效果 */
+        .glitch-text {
+            position: relative;
+            color: #fff;
+        }
+        .glitch-text::before, .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+        }
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -1px 0 var(--neon-pink);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -1px 0 var(--neon-cyan);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(14px, 9999px, 129px, 0); }
+            100% { clip: rect(32px, 9999px, 126px, 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(122px, 9999px, 14px, 0); }
+            100% { clip: rect(63px, 9999px, 83px, 0); }
+        }
+
+        /* 时间轴 */
+        .timeline-line {
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-purple));
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 6px;
+            width: 20px;
+            height: 20px;
+            background: var(--dark-bg);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+        
+        @media (min-width: 768px) {
+            .timeline-line { left: 50%; transform: translateX(-50%); }
+            .timeline-dot { left: 50%; transform: translateX(-50%); }
+            .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+        }
+
+        /* Modal Styles */
+        .zone-modal {
             position: fixed;
             top: 0;
-            right: 0;
+            left: 0;
             width: 100%;
-            max-width: 300px;
-            height: 100vh;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 20px;
-            transform: translateX(100%);
+            height: 100%;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .zone-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: #0a0a0e;
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 50px rgba(0, 243, 255, 0.2);
+            transform: scale(0.95);
             transition: transform 0.3s ease;
         }
-        
-        .mobile-menu.open {
-            transform: translateX(0);
+
+        .zone-modal.active .modal-content {
+            transform: scale(1);
         }
-        
-        .section-title {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 2rem;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 2px;
-        }
-        
-        .section-title.center:after {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .stats-card {
-            text-align: center;
-            padding: 25px;
-            border-radius: 16px;
-            background: rgba(26, 32, 44, 0.5);
-            border: 1px solid rgba(0, 255, 157, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .stats-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            background: rgba(26, 32, 44, 0.7);
-        }
-        
-        .stats-card i {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: var(--accent);
-        }
-        
-        .stats-card .number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .zone-card {
-            position: relative;
-            overflow: hidden;
-            height: 300px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 16px;
-            cursor: pointer;
-        }
-        
-        .zone-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
-            z-index: 1;
-        }
-        
-        .zone-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 24px;
-            z-index: 2;
-        }
-        
-        .timeline-item {
-            position: relative;
-            padding-left: 40px;
-            padding-bottom: 32px;
-        }
-        
-        .timeline-item:before {
-            content: '';
-            position: absolute;
-            left: 12px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, var(--primary), var(--accent));
-        }
-        
-        .timeline-item:after {
-            content: '';
-            position: absolute;
-            left: 8px;
-            top: 8px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 10px var(--accent);
-        }
-        
-        .timeline-item:last-child:before {
-            display: none;
-        }
-        
-        .investment-highlight {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
-            border: 1px solid rgba(255, 215, 0, 0.3);
-        }
-        
-        .tech-feature {
-            background: rgba(26, 32, 44, 0.5);
-            border-left: 4px solid var(--accent);
-            padding: 20px;
-            margin-bottom: 16px;
-            border-radius: 8px;
-        }
-        
-        @media (max-width: 768px) {
-            .desktop-nav {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .logo-font {
-                font-size: 1.5rem;
-            }
-            
-            .hero {
-                min-height: 70vh;
-                padding-top: 80px;
-            }
-            
-            .hero-bg {
-                animation: none;
-            }
-            
-            .grid-cols-1-md {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats-card {
-                padding: 15px;
-            }
-            
-            .stats-card .number {
-                font-size: 2rem;
-            }
-            
-            .section-title {
-                font-size: 1.5rem;
-            }
-            
-            .zone-card {
-                height: 250px;
-            }
-            
-            .zone-content {
-                padding: 16px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero {
-                min-height: 60vh;
-            }
-            
-            .stats-card .number {
-                font-size: 1.8rem;
-            }
-            
-            .zone-card {
-                height: 200px;
-            }
-        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 3px; }
     </style>
 </head>
-<body>
-    <!-- AI Elements -->
-    <div class="ai-element" style="top: 120px; left: 5%;">
-        PROJECT_ID: W404-2030 <br>
-        STATUS: ACTIVE <br>
-        // 多元宇宙運算中...
-    </div>
-    
-    <div class="ai-element" style="bottom: 150px; right: 5%;">
-        INVESTMENT: 280億 RMB <br>
-        VISITORS: 1200萬/年 <br>
-        // 體驗生成中...
-    </div>
-    
-    <!-- Data streams -->
-    <div class="data-stream" style="left: 15%; animation-delay: 0s;"></div>
-    <div class="data-stream" style="left: 35%; animation-delay: 0.5s;"></div>
-    <div class="data-stream" style="left: 55%; animation-delay: 1s;"></div>
-    <div class="data-stream" style="left: 75%; animation-delay: 1.5s;"></div>
+<body class="text-gray-300">
+    <div class="scanline"></div>
 
-    <!-- Navigation -->
-    <nav class="navbar fixed w-full z-50 px-4 py-3">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="flex items-center">
-                <div class="logo-font text-2xl md:text-3xl">WORLD404</div>
-                <div class="ml-3 text-sm text-gray-300">多元宇宙主題樂園</div>
+    <!-- 导航栏 (Absolute positioning for scroll behavior) -->
+    <nav class="absolute w-full top-0 z-50 bg-black/90 backdrop-blur-lg border-b border-white/10">
+        <div class="container mx-auto px-4 h-20 flex justify-between items-center">
+            <!-- LOGO -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 border-2 border-cyan-400 rounded-sm flex items-center justify-center relative overflow-hidden group-hover:border-purple-500 transition-colors">
+                    <i class="fas fa-globe text-xl text-white"></i>
+                    <div class="absolute inset-0 bg-cyan-400/20 animate-pulse"></div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-cyber text-2xl font-bold tracking-widest text-white leading-none">WORLD<span class="text-cyan-400">404</span></span>
+                </div>
             </a>
-            <div class="hidden md:flex space-x-8 desktop-nav">
-                <a href="#home" class="hover:text-blue-400 transition">首頁</a>
-                <a href="#zones" class="hover:text-blue-400 transition">主題區域</a>
-                <a href="#experience" class="hover:text-blue-400 transition">體驗特色</a>
-                <a href="#technology" class="hover:text-blue-400 transition">核心技術</a>
-                <a href="#investment" class="hover:text-blue-400 transition">投資計劃</a>
-                <a href="#timeline" class="hover:text-blue-400 transition">發展路線</a>
-                <a href="#contact" class="hover:text-blue-400 transition">聯絡我們</a>
-            </div>
-            <div class="flex items-center space-x-4">
-                <a href="#invest" class="btn-primary px-6 py-2 rounded-full text-sm hidden md:inline-block">
-                    投資諮詢
+
+            <!-- 桌面菜单 -->
+            <div class="hidden lg:flex items-center space-x-6 xl:space-x-8">
+                <a href="#home" class="text-xs font-bold tracking-widest hover:text-cyan-400 transition uppercase" data-i18n="nav_home">Home</a>
+                <a href="#zones" class="text-xs font-bold tracking-widest hover:text-cyan-400 transition uppercase" data-i18n="nav_zones">Zones</a>
+                <a href="#technology" class="text-xs font-bold tracking-widest hover:text-cyan-400 transition uppercase" data-i18n="nav_tech">Tech</a>
+                <a href="#investment" class="text-xs font-bold tracking-widest hover:text-cyan-400 transition uppercase" data-i18n="nav_invest">Invest</a>
+                <a href="#timeline" class="text-xs font-bold tracking-widest hover:text-cyan-400 transition uppercase" data-i18n="nav_timeline">Roadmap</a>
+                
+                <!-- 语言切换 (桌面) -->
+                <div class="flex border border-gray-700 rounded-sm overflow-hidden">
+                    <button onclick="setLanguage('en')" id="langEnDesk" class="px-3 py-1 text-xs font-bold bg-cyan-900/50 text-cyan-400 hover:bg-cyan-400 hover:text-black transition">EN</button>
+                    <button onclick="setLanguage('tc')" id="langTcDesk" class="px-3 py-1 text-xs font-bold text-gray-500 hover:bg-cyan-400 hover:text-black transition">繁體</button>
+                </div>
+
+                <a href="#contact" class="btn-cyber px-6 py-2 text-xs font-bold" data-i18n="nav_contact">
+                    CONTACT US
                 </a>
-                <button class="md:hidden text-white mobile-menu-btn">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
             </div>
+
+            <!-- 移动端汉堡菜单按钮 -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-2xl text-white hover:text-cyan-400 transition z-50 relative p-2 focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu">
-        <div class="mobile-menu-close absolute top-4 right-4 text-xl cursor-pointer">
-            <i class="fas fa-times"></i>
-        </div>
+    <!-- 移动端侧边栏 (修复版结构) -->
+    <div id="mobileMenuContainer" class="fixed inset-0 hidden">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/90 transition-opacity duration-300 opacity-0" id="mobileMenuOverlay" onclick="toggleMobileMenu()"></div>
         
-        <div class="mt-12 flex flex-col space-y-6">
-            <a href="#home" class="text-xl hover:text-blue-400 transition">首頁</a>
-            <a href="#zones" class="text-xl hover:text-blue-400 transition">主題區域</a>
-            <a href="#experience" class="text-xl hover:text-blue-400 transition">體驗特色</a>
-            <a href="#technology" class="text-xl hover:text-blue-400 transition">核心技術</a>
-            <a href="#investment" class="text-xl hover:text-blue-400 transition">投資計劃</a>
-            <a href="#timeline" class="text-xl hover:text-blue-400 transition">發展路線</a>
-            <a href="#contact" class="text-xl hover:text-blue-400 transition">聯絡我們</a>
+        <!-- Drawer -->
+        <div class="absolute top-0 right-0 w-[85%] max-w-sm h-full bg-[#050505] border-l border-cyan-400 p-8 flex flex-col shadow-[0_0_50px_rgba(0,243,255,0.2)] transform translate-x-full transition-transform duration-300" id="mobileMenuDrawer">
+            <div class="flex justify-between items-center mb-12 border-b border-gray-800 pb-4">
+                <span class="font-cyber text-2xl text-white">SYSTEM <span class="text-cyan-400">MENU</span></span>
+                <button onclick="toggleMobileMenu()" class="text-gray-400 text-2xl hover:text-white p-2"><i class="fas fa-times"></i></button>
+            </div>
             
-            <div class="pt-6 border-t border-gray-700">
-                <button class="btn-primary w-full py-3 rounded-lg font-medium text-center">
-                    投資諮詢
-                </button>
+            <div class="flex flex-col space-y-6 font-cyber text-lg">
+                <a href="#home" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition block" data-i18n="nav_home">HOME</a>
+                <a href="#zones" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition block" data-i18n="nav_zones">ZONES</a>
+                <a href="#experience" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition block" data-i18n="nav_experience">EXPERIENCE</a>
+                <a href="#technology" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition block" data-i18n="nav_tech">TECHNOLOGY</a>
+                <a href="#investment" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition block" data-i18n="nav_invest">INVESTMENT</a>
+                <a href="#timeline" onclick="toggleMobileMenu()" class="hover:text-cyan-400 transition block" data-i18n="nav_timeline">ROADMAP</a>
+            </div>
+
+            <div class="mt-auto pt-8 border-t border-gray-800">
+                <div class="flex items-center justify-between mb-6">
+                    <span class="text-xs text-gray-500 tracking-widest">LANGUAGE</span>
+                    <div class="flex gap-2">
+                        <button onclick="setLanguage('en')" id="langEnMob" class="text-xs font-bold text-cyan-400 border border-cyan-400 px-3 py-2 transition-colors">EN</button>
+                        <button onclick="setLanguage('tc')" id="langTcMob" class="text-xs font-bold text-gray-500 border border-gray-700 px-3 py-2 transition-colors">繁體</button>
+                    </div>
+                </div>
+                <a href="#contact" onclick="toggleMobileMenu()" class="btn-cyber w-full py-4 font-bold block" data-i18n="nav_contact">CONTACT US</a>
             </div>
         </div>
     </div>
 
     <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-        <div class="container mx-auto px-4 hero-content">
-            <div class="max-w-4xl text-center animate-fade-in">
-                <h1 class="text-4xl md:text-7xl font-bold mb-6">
-                    <span class="gradient-text">World404</span><br>
-                    無限互動宇宙
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-                    全球首個革命性的量子敘事主題樂園<br>
-                    位於杭州灣新區，投資280億人民幣<br>
-                    打造真正的多元宇宙互動體驗生態系統
-                </p>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center mb-12">
-                    <a href="#investment" class="btn-primary px-8 py-4 rounded-full font-medium text-lg">
-                        投資機會
-                    </a>
-                    <a href="#zones" class="btn-secondary px-8 py-4 rounded-full font-medium text-lg">
-                        探索園區
-                    </a>
+    <section id="home" class="relative pt-32 pb-20 min-h-screen flex items-center overflow-hidden">
+        <!-- 背景 -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-20 mix-blend-screen"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-black"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <div class="max-w-5xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-3 py-1 border border-cyan-500/50 bg-cyan-500/10 text-cyan-400 text-xs font-mono mb-6 tracking-widest">
+                    <span class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
+                    <span data-i18n="hero_status">SYSTEM ONLINE // HANGZHOU BAY</span>
                 </div>
                 
-                <!-- Key Stats -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-                    <div class="stats-card">
-                        <i class="fas fa-coins"></i>
-                        <div class="number">280億</div>
-                        <div class="text-sm">總投資額 (RMB)</div>
+                <h1 class="font-cyber text-5xl lg:text-7xl font-bold leading-tight mb-6 glitch-text" data-text="INFINITE UNIVERSE" data-i18n="hero_title">
+                    World404<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Infinite Interaction Universe</span>
+                </h1>
+                
+                <p class="text-lg text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed" data-i18n="hero_desc">
+                    The world's first revolutionary quantum narrative theme park. 
+                    Located in Hangzhou Bay New Zone, investing 28 billion RMB 
+                    to build a true multiverse interactive experience ecosystem.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+                    <a href="#investment" class="btn-cyber px-8 py-4 text-sm font-bold">
+                        <span data-i18n="btn_invest">Investment Opportunities</span>
+                    </a>
+                    <a href="#zones" class="btn-cyber btn-gold px-8 py-4 text-sm font-bold">
+                        <span data-i18n="btn_explore">Explore Zones</span>
+                    </a>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="hud-panel p-6 text-center group">
+                        <div class="hud-corner"></div>
+                        <i class="fas fa-coins text-2xl text-cyan-400 mb-2"></i>
+                        <div class="text-3xl font-bold text-white font-tech mb-1" data-i18n="stat_invest_val">28B</div>
+                        <div class="text-xs text-gray-500 tracking-widest" data-i18n="stat_invest_label">Total Investment (RMB)</div>
                     </div>
-                    <div class="stats-card">
-                        <i class="fas fa-users"></i>
-                        <div class="number">1200萬</div>
-                        <div class="text-sm">年接待量 (人次)</div>
+                    <div class="hud-panel p-6 text-center group">
+                        <div class="hud-corner"></div>
+                        <i class="fas fa-users text-2xl text-purple-400 mb-2"></i>
+                        <div class="text-3xl font-bold text-white font-tech mb-1" data-i18n="stat_visitors_val">12M</div>
+                        <div class="text-xs text-gray-500 tracking-widest" data-i18n="stat_visitors_label">Annual Visitors</div>
                     </div>
-                    <div class="stats-card">
-                        <i class="fas fa-map-marked-alt"></i>
-                        <div class="number">300</div>
-                        <div class="text-sm">佔地面積 (公頃)</div>
+                    <div class="hud-panel p-6 text-center group">
+                        <div class="hud-corner"></div>
+                        <i class="fas fa-map-marked-alt text-2xl text-green-400 mb-2"></i>
+                        <div class="text-3xl font-bold text-white font-tech mb-1">300</div>
+                        <div class="text-xs text-gray-500 tracking-widest" data-i18n="stat_area_label">Hectares Area</div>
                     </div>
-                    <div class="stats-card">
-                        <i class="fas fa-calendar-alt"></i>
-                        <div class="number">2030</div>
-                        <div class="text-sm">正式開園</div>
+                    <div class="hud-panel p-6 text-center group">
+                        <div class="hud-corner"></div>
+                        <i class="fas fa-calendar-alt text-2xl text-gold-400 text-yellow-400 mb-2"></i>
+                        <div class="text-3xl font-bold text-white font-tech mb-1">2030</div>
+                        <div class="text-xs text-gray-500 tracking-widest" data-i18n="stat_open_label">Grand Opening</div>
                     </div>
                 </div>
             </div>
@@ -584,66 +375,73 @@
     </section>
 
     <!-- Project Overview -->
-    <section class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
+    <section class="py-24 bg-black/50">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="section-title center text-4xl md:text-5xl font-bold">項目概述</h2>
-                <p class="text-xl text-gray-300 max-w-4xl mx-auto mt-6">
-                    World404不僅是一個主題樂園，而是一個打破傳統邊界的多維互動體驗生態系統，
-                    將每位訪客轉變為體驗的主動創造者，而非被動消費者。
+                <h2 class="font-cyber text-3xl lg:text-5xl font-bold mb-4" data-i18n="overview_title">Project Overview</h2>
+                <p class="text-gray-400 max-w-3xl mx-auto" data-i18n="overview_desc">
+                    World404 is not just a theme park, but a multi-dimensional interactive experience ecosystem 
+                    that breaks traditional boundaries, transforming every visitor into an active creator.
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
-                <div class="animate-slide-right">
-                    <h3 class="text-3xl font-bold mb-6 gradient-text">核心創新理念</h3>
-                    <div class="space-y-6">
-                        <div class="tech-feature">
-                            <h4 class="text-xl font-semibold mb-2">
-                                <i class="fas fa-atom text-accent mr-3"></i>量子敘事
-                            </h4>
-                            <p class="text-gray-300">
-                                每個時刻都存在無限可能性，每個決定都創造新的現實分支，體驗沒有「正確」或「錯誤」的選擇。
-                            </p>
-                        </div>
-                        <div class="tech-feature">
-                            <h4 class="text-xl font-semibold mb-2">
-                                <i class="fas fa-network-wired text-accent mr-3"></i>群體量子糾纏
-                            </h4>
-                            <p class="text-gray-300">
-                                訪客的行為、情緒和決定相互影響，形成量子糾纏的體驗網絡，每個人既是自己故事的主角，也是他人故事的變量。
-                            </p>
-                        </div>
-                        <div class="tech-feature">
-                            <h4 class="text-xl font-semibold mb-2">
-                                <i class="fas fa-seedling text-accent mr-3"></i>跨物種共感
-                            </h4>
-                            <p class="text-gray-300">
-                                首創將非人類生物的行為模式、情緒反應納入敘事生成，創造真正的跨物種共享體驗。
-                            </p>
-                        </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold mb-6 text-cyan-400" data-i18n="innovation_title">Core Innovations</h3>
+                    
+                    <div class="hud-panel p-6 group">
+                        <div class="hud-corner"></div>
+                        <h4 class="text-lg font-bold text-white mb-2 flex items-center">
+                            <i class="fas fa-atom text-cyan-400 mr-3"></i> <span data-i18n="innov1_title">Quantum Narrative</span>
+                        </h4>
+                        <p class="text-gray-400 text-sm" data-i18n="innov1_desc">
+                            Infinite possibilities exist in every moment. Every decision creates a new reality branch. 
+                            There are no "right" or "wrong" choices in this experience.
+                        </p>
+                    </div>
+
+                    <div class="hud-panel p-6 group">
+                        <div class="hud-corner"></div>
+                        <h4 class="text-lg font-bold text-white mb-2 flex items-center">
+                            <i class="fas fa-network-wired text-purple-400 mr-3"></i> <span data-i18n="innov2_title">Collective Entanglement</span>
+                        </h4>
+                        <p class="text-gray-400 text-sm" data-i18n="innov2_desc">
+                            Visitors' behaviors, emotions, and decisions affect each other, forming an entangled 
+                            experience network. Everyone is both a protagonist and a variable.
+                        </p>
+                    </div>
+
+                    <div class="hud-panel p-6 group">
+                        <div class="hud-corner"></div>
+                        <h4 class="text-lg font-bold text-white mb-2 flex items-center">
+                            <i class="fas fa-seedling text-green-400 mr-3"></i> <span data-i18n="innov3_title">Trans-species Empathy</span>
+                        </h4>
+                        <p class="text-gray-400 text-sm" data-i18n="innov3_desc">
+                            Pioneering the inclusion of non-human behavioral patterns and emotional reactions 
+                            into narrative generation, creating a true shared experience.
+                        </p>
                     </div>
                 </div>
-                <div class="animate-slide-left">
-                    <div class="card p-8">
-                        <h3 class="text-2xl font-bold mb-6">項目亮點</h3>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="text-center">
-                                <div class="text-3xl font-bold text-accent mb-2">7</div>
-                                <div class="text-sm text-gray-300">主題區域</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-3xl font-bold text-accent mb-2">AI</div>
-                                <div class="text-sm text-gray-300">核心驅動</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-3xl font-bold text-accent mb-2">24/7</div>
-                                <div class="text-sm text-gray-300">持續演化</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-3xl font-bold text-accent mb-2">∞</div>
-                                <div class="text-sm text-gray-300">無限可能</div>
-                            </div>
+
+                <div class="hud-panel p-8 text-center">
+                    <div class="hud-corner"></div>
+                    <h3 class="text-xl font-bold mb-8 text-white" data-i18n="highlights_title">Project Highlights</h3>
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <div class="text-4xl font-bold text-cyan-400 mb-2 font-tech">7</div>
+                            <div class="text-xs text-gray-500 uppercase" data-i18n="hl_zones">Themed Zones</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold text-purple-400 mb-2 font-tech">AI</div>
+                            <div class="text-xs text-gray-500 uppercase" data-i18n="hl_core">Core Driven</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold text-green-400 mb-2 font-tech">24/7</div>
+                            <div class="text-xs text-gray-500 uppercase" data-i18n="hl_evo">Continuous Evolution</div>
+                        </div>
+                        <div>
+                            <div class="text-4xl font-bold text-pink-400 mb-2 font-tech">∞</div>
+                            <div class="text-xs text-gray-500 uppercase" data-i18n="hl_inf">Infinite Possibility</div>
                         </div>
                     </div>
                 </div>
@@ -651,814 +449,224 @@
         </div>
     </section>
 
-    <!-- Themed Zones -->
-    <section id="zones" class="py-20">
-        <div class="container mx-auto px-4">
+    <!-- Zones -->
+    <section id="zones" class="py-24">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="section-title center text-4xl md:text-5xl font-bold">七大主題宇宙</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto mt-6">
-                    每個主題區域都是獨特的敘事空間，從中央「起源之核」向外輻射，創造無限探索的宇宙隱喻。
+                <h2 class="font-cyber text-3xl lg:text-5xl font-bold mb-6" data-i18n="zones_title">Seven Themed Universes</h2>
+                <p class="text-gray-400 max-w-3xl mx-auto" data-i18n="zones_desc">
+                    Each themed zone is a unique narrative space, radiating from the central "Origin Nexus", 
+                    creating a metaphor for the universe of infinite exploration.
                 </p>
             </div>
 
             <!-- Origin Nexus -->
-            <div class="mb-20">
-                <div class="card p-8 investment-highlight">
-                    <div class="text-center mb-8">
-                        <h3 class="text-3xl font-bold mb-4">
-                            <i class="fas fa-star text-gold mr-3"></i>起源之核 Origin Nexus
-                        </h3>
-                        <p class="text-xl text-gray-300">
-                            園區的物理和概念中心，巨大的球形建築群，作為通往無限可能性的門戶
-                        </p>
-                    </div>
-                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div class="text-center">
-                            <i class="fas fa-globe text-4xl text-accent mb-4"></i>
-                            <h4 class="font-semibold mb-2">量子大廳</h4>
-                            <p class="text-sm text-gray-300">360度環繞式屏幕和交互地面系統</p>
-                        </div>
-                        <div class="text-center">
-                            <i class="fas fa-user-cog text-4xl text-accent mb-4"></i>
-                            <h4 class="font-semibold mb-2">身份熔爐</h4>
-                            <p class="text-sm text-gray-300">創建個人「宇宙身份」的地方</p>
-                        </div>
-                        <div class="text-center">
-                            <i class="fas fa-tree text-4xl text-accent mb-4"></i>
-                            <h4 class="font-semibold mb-2">世界樹中樞</h4>
-                            <p class="text-sm text-gray-300">30米高的「數據樹」互動裝置</p>
-                        </div>
-                        <div class="text-center">
-                            <i class="fas fa-clock text-4xl text-accent mb-4"></i>
-                            <h4 class="font-semibold mb-2">時間螺旋</h4>
-                            <p class="text-sm text-gray-300">展現時間與空間交融的建築</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Themed Zones Grid -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Personal Cosmos -->
-                <div class="zone-card" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                    <div class="zone-content">
-                        <h3 class="text-2xl font-bold mb-2">個人宇宙區</h3>
-                        <p class="text-gray-200 mb-4">深度個性化體驗，每位訪客獲得完全獨特的故事旅程</p>
-                        <div class="flex space-x-2">
-                            <span class="bg-blue-500 bg-opacity-80 text-white text-xs px-2 py-1 rounded">無限鏡廳</span>
-                            <span class="bg-purple-500 bg-opacity-80 text-white text-xs px-2 py-1 rounded">記憶編織者</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Collective Cosmos -->
-                <div class="zone-card" style="background-image: url('https://images.unsplash.com/photo-1573152958734-1922c188fba3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                    <div class="zone-content">
-                        <h3 class="text-2xl font-bold mb-2">群體宇宙區</h3>
-                        <p class="text-gray-200 mb-4">創造量子糾纏式群體互動體驗，訪客形成深度關聯的共享敘事</p>
-                        <div class="flex space-x-2">
-                            <span class="bg-green-500 bg-opacity-80 text-white text-xs px-2 py-1 rounded">共鳴球廳</span>
-                            <span class="bg-blue-500 bg-opacity-80 text-white text-xs px-2 py-1 rounded">量子糾纏劇場</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Transspecies Cosmos -->
-                <div class="zone-card" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                    <div class="zone-content">
-                        <h3 class="text-2xl font-bold mb-2">跨物種宇宙區</h3>
-                        <p class="text-gray-200 mb-4">突破人類中心娛樂形式，創造人類與其他生物共同參與的互動體驗</p>
-                        <div class="flex space-x-2">
-                            <span class="bg-yellow-500 bg-opacity-80 text-white text-xs px-2 py-1 rounded">生物多樣性穹頂</span>
-                            <span class="bg-red-500 bg-opacity-80 text-white text-xs px-2 py-1 rounded">跨物種對話</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Elemental Cosmos -->
-                <div class="zone-card" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                    <div class="zone-content">
-                        <h3 class="text-2xl font-bold mb-2">元素宇宙區</h3>
-                        <p class="text-gray-200 mb-4">專注自然元素力量，讓訪客與火、水、土、氣等基本元素互動</p>
-                        <div class="flex space-x-2">
-                            <span class="bg-orange-500 bg-opacity-80 text-white text-xs px-2 py-1 rounded">火焰之心</span>
-                            <span class="bg-blue-500 bg-opacity-80 text-white text-xs px-2 py-1 rounded">水之記憶宮</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Digital Cosmos -->
-                <div class="zone-card" style="background-image: url('https://images.unsplash.com/photo-1551808525-51a94da548ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                    <div class="zone-content">
-                        <h3 class="text-2xl font-bold mb-2">數字宇宙區</h3>
-                        <p class="text-gray-200 mb-4">探索數字與物理邊界，專注數據、代碼和虛擬現實的可能性</p>
-                        <div class="flex space-x-2">
-                            <span class="bg-cyan-500 bg-opacity-80 text-white text-xs px-2 py-1 rounded">代碼森林</span>
-                            <span class="bg-purple-500 bg-opacity-80 text-white text-xs px-2 py-1 rounded">現實扭曲實驗室</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Eternal Cosmos -->
-                <div class="zone-card" style="background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                    <div class="zone-content">
-                        <h3 class="text-2xl font-bold mb-2">永恆宇宙區</h3>
-                        <p class="text-gray-200 mb-4">專注時間、記憶和傳承，創造超越物理園區邊界的持久個人敘事宇宙</p>
-                        <div class="flex space-x-2">
-                            <span class="bg-indigo-500 bg-opacity-80 text-white text-xs px-2 py-1 rounded">數字孿生工坊</span>
-                            <span class="bg-violet-500 bg-opacity-80 text-white text-xs px-2 py-1 rounded">時間膠囊花園</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Wisdom Cosmos -->
-                <div class="zone-card" style="background-image: url('https://images.unsplash.com/photo-1528716321680-815a8cdb8cbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
-                    <div class="zone-content">
-                        <h3 class="text-2xl font-bold mb-2">智慧宇宙區</h3>
-                        <p class="text-gray-200 mb-4">融合中國傳統文化與未來思想，探索知識、智慧和哲學概念</p>
-                        <div class="flex space-x-2">
-                            <span class="bg-amber-500 bg-opacity-80 text-white text-xs px-2 py-1 rounded">太極廣場</span>
-                            <span class="bg-emerald-500 bg-opacity-80 text-white text-xs px-2 py-1 rounded">哲思閣</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Core Experience Features -->
-    <section id="experience" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="section-title center text-4xl md:text-5xl font-bold">革命性體驗特色</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto mt-6">
-                    World404不僅提供娛樂，更是重新定義人類與技術、自然和社群的互動方式
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-                <div class="card p-8 text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient flex items-center justify-center">
-                        <i class="fas fa-brain text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">動態個人化故事生成</h3>
-                    <p class="text-gray-300 mb-4">
-                        每位訪客的體驗都是獨一無二、不可重複的旅程，根據情緒、選擇和互動實時創建
+            <div class="hud-panel p-8 mb-12 border-yellow-500/30">
+                <div class="hud-corner"></div>
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold mb-2 text-yellow-400">
+                        <i class="fas fa-star mr-2"></i> <span data-i18n="nexus_title">Origin Nexus</span>
+                    </h3>
+                    <p class="text-gray-400 text-sm" data-i18n="nexus_desc">
+                        The physical and conceptual center of the park, a massive spherical complex serving as the gateway to infinite possibilities.
                     </p>
-                    <ul class="text-sm text-gray-400 space-y-2">
-                        <li>• 即時情緒分析與回應</li>
-                        <li>• 無限分支敘事系統</li>
-                        <li>• 個人化角色發展</li>
-                    </ul>
                 </div>
-
-                <div class="card p-8 text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient flex items-center justify-center">
-                        <i class="fas fa-users-cog text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">群體量子糾纏體驗</h3>
-                    <p class="text-gray-300 mb-4">
-                        不同訪客的行為、情緒和決定相互影響，形成複雜的互動網絡
-                    </p>
-                    <ul class="text-sm text-gray-400 space-y-2">
-                        <li>• 多層互動影響系統</li>
-                        <li>• 群體情緒可視化</li>
-                        <li>• 集體決策節點</li>
-                    </ul>
-                </div>
-
-                <div class="card p-8 text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient flex items-center justify-center">
-                        <i class="fas fa-leaf text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">跨物種互動敘事</h3>
-                    <p class="text-gray-300 mb-4">
-                        首創將非人類生物作為敘事參與者，創造真正的生態系統敘事
-                    </p>
-                    <ul class="text-sm text-gray-400 space-y-2">
-                        <li>• 動物行為分析系統</li>
-                        <li>• 植物反應監測</li>
-                        <li>• 生物節律融合</li>
-                    </ul>
-                </div>
-
-                <div class="card p-8 text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient flex items-center justify-center">
-                        <i class="fas fa-infinity text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">時間持久的個人宇宙</h3>
-                    <p class="text-gray-300 mb-4">
-                        體驗不會在離開園區時結束，而是繼續在數字空間演化
-                    </p>
-                    <ul class="text-sm text-gray-400 space-y-2">
-                        <li>• 持續性個人敘事</li>
-                        <li>• 離線期間自主發展</li>
-                        <li>• 跨時空體驗連續性</li>
-                    </ul>
-                </div>
-
-                <div class="card p-8 text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient flex items-center justify-center">
-                        <i class="fas fa-yin-yang text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">東方哲學與現代科技融合</h3>
-                    <p class="text-gray-300 mb-4">
-                        深度整合中國傳統哲學思想與前沿技術，創造獨特的體驗語言
-                    </p>
-                    <ul class="text-sm text-gray-400 space-y-2">
-                        <li>• 太極陰陽互動原理</li>
-                        <li>• 五行相生相克設計</li>
-                        <li>• 道法自然體驗哲學</li>
-                    </ul>
-                </div>
-
-                <div class="card p-8 text-center">
-                    <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-gradient flex items-center justify-center">
-                        <i class="fas fa-globe-asia text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">數字江南園林美學</h3>
-                    <p class="text-gray-300 mb-4">
-                        汲取江南園林設計哲學，通過數字技術實現傳統無法達到的形式
-                    </p>
-                    <ul class="text-sm text-gray-400 space-y-2">
-                        <li>• 曲徑通幽數字化</li>
-                        <li>• 移步換景智能化</li>
-                        <li>• 借景抄情現代化</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Supporting Facilities -->
-            <div class="mb-16">
-                <h3 class="text-3xl font-bold text-center mb-12">配套設施與延伸體驗</h3>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div class="card p-8">
-                        <h4 class="text-2xl font-bold mb-6">
-                            <i class="fas fa-bed text-accent mr-3"></i>星晨旅舍
-                        </h4>
-                        <div class="space-y-4">
-                            <div class="border-l-4 border-accent pl-4">
-                                <h5 class="font-semibold mb-2">夢境套房</h5>
-                                <p class="text-sm text-gray-300">配備腦波監測系統，根據睡眠狀態調整環境</p>
-                            </div>
-                            <div class="border-l-4 border-accent pl-4">
-                                <h5 class="font-semibold mb-2">元素客房</h5>
-                                <p class="text-sm text-gray-300">基於五行元素設計，每種元素房間有獨特感官體驗</p>
-                            </div>
-                            <div class="border-l-4 border-accent pl-4">
-                                <h5 class="font-semibold mb-2">量子套房</h5>
-                                <p class="text-sm text-gray-300">牆面動態顯示，從不同角度看房間呈現不同樣貌</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card p-8">
-                        <h4 class="text-2xl font-bold mb-6">
-                            <i class="fas fa-utensils text-accent mr-3"></i>感官饗宴
-                        </h4>
-                        <div class="space-y-4">
-                            <div class="border-l-4 border-accent pl-4">
-                                <h5 class="font-semibold mb-2">多維度餐廳</h5>
-                                <p class="text-sm text-gray-300">每張餐桌是不同「維度」的窗口，提供前所未有的用餐體驗</p>
-                            </div>
-                            <div class="border-l-4 border-accent pl-4">
-                                <h5 class="font-semibold mb-2">情緒調味館</h5>
-                                <p class="text-sm text-gray-300">根據訪客當前情緒和期望情緒定制食物</p>
-                            </div>
-                            <div class="border-l-4 border-accent pl-4">
-                                <h5 class="font-semibold mb-2">生物發光餐廳</h5>
-                                <p class="text-sm text-gray-300">完全依靠生物發光生物提供照明的獨特用餐環境</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Core Technology -->
-    <section id="technology" class="py-20">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="section-title center text-4xl md:text-5xl font-bold">核心技術系統</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto mt-6">
-                    World404的體驗基於五大突破性技術系統，實現毫秒級響應的深度個性化互動
-                </p>
-            </div>
-
-            <div class="space-y-12">
-                <!-- Real-time Interaction Engine -->
-                <div class="card p-8">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 gradient-text">
-                                <i class="fas fa-microchip mr-3"></i>實時互動引擎
-                            </h3>
-                            <p class="text-gray-300 mb-6">
-                                突破性的實時互動引擎，作為整個系統的核心神經網絡，實現毫秒級響應的深度個性化交互
-                            </p>
-                            <div class="space-y-3">
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>分佈式計算網絡：超過5000個邊緣計算節點</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>多模態感知系統：全方位捕捉訪客行為和環境信息</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>情緒識別與分析：多信號推斷訪客情緒狀態</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-64 h-64 mx-auto rounded-full border-4 border-accent relative overflow-hidden">
-                                <div class="absolute inset-0 bg-gradient opacity-20"></div>
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <i class="fas fa-brain text-6xl text-accent"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quantum Narrative Network -->
-                <div class="card p-8">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div class="order-2 md:order-1 text-center">
-                            <div class="w-64 h-64 mx-auto rounded-full border-4 border-secondary relative overflow-hidden">
-                                <div class="absolute inset-0 bg-gradient opacity-20"></div>
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <i class="fas fa-network-wired text-6xl text-secondary"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="order-1 md:order-2">
-                            <h3 class="text-2xl font-bold mb-4 gradient-text">
-                                <i class="fas fa-book-open mr-3"></i>量子敘事網絡
-                            </h3>
-                            <p class="text-gray-300 mb-6">
-                                負責生成、管理和演化World404的故事體驗，創造無限分支且個人化的敘事宇宙
-                            </p>
-                            <div class="space-y-3">
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>遞歸神經敘事模型：自適應的敘事生成系統</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>可能性空間管理：處理無限分支的故事狀態空間</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>動態分支生成：實時創造新的敘事可能性</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Biometric Fusion System -->
-                <div class="card p-8">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 gradient-text">
-                                <i class="fas fa-heartbeat mr-3"></i>生物融合系統
-                            </h3>
-                            <p class="text-gray-300 mb-6">
-                                創建人類與技術、環境之間的無縫連接，使訪客的生物反饋成為體驗的核心驅動力
-                            </p>
-                            <div class="space-y-3">
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>非侵入式生物監測：無感知捕捉生物信號</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>跨物種信號處理：理解不同生物的反應</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>情緒-環境適應：環境根據生物反饋調整</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-64 h-64 mx-auto rounded-full border-4 border-primary relative overflow-hidden">
-                                <div class="absolute inset-0 bg-gradient opacity-20"></div>
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <i class="fas fa-dna text-6xl text-primary"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Ambient Intelligence Grid -->
-                <div class="card p-8">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div class="order-2 md:order-1 text-center">
-                            <div class="w-64 h-64 mx-auto rounded-full border-4 border-accent relative overflow-hidden">
-                                <div class="absolute inset-0 bg-gradient opacity-20"></div>
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <i class="fas fa-cube text-6xl text-accent"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="order-1 md:order-2">
-                            <h3 class="text-2xl font-bold mb-4 gradient-text">
-                                <i class="fas fa-wifi mr-3"></i>環境智能網絡
-                            </h3>
-                            <p class="text-gray-300 mb-6">
-                                將整個World404園區轉變為響應式、適應性的智能環境，消除技術與體驗之間的可見邊界
-                            </p>
-                            <div class="space-y-3">
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>分布式環境計算：遍布園區的智能節點網絡</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>智能材料系統：使物理環境具有響應能力</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>無縫環境轉換：流暢改變環境狀態和功能</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Perpetual Existence Framework -->
-                <div class="card p-8">
-                    <div class="grid md:grid-cols-2 gap-8 items-center">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 gradient-text">
-                                <i class="fas fa-infinity mr-3"></i>永續存在框架
-                            </h3>
-                            <p class="text-gray-300 mb-6">
-                                實現體驗的持久存在和演化，打破傳統體驗的時間和空間限制，創造真正的無限敘事宇宙
-                            </p>
-                            <div class="space-y-3">
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>分布式數據持久化：維護長期數據完整性</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>異步演化引擎：訪客不在場時也能發展敘事</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <i class="fas fa-check text-accent mr-3"></i>
-                                    <span>個人宇宙持久化：維護個人敘事的連續性</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <div class="w-64 h-64 mx-auto rounded-full border-4 border-gold relative overflow-hidden">
-                                <div class="absolute inset-0 bg-gradient opacity-20"></div>
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <i class="fas fa-hourglass text-6xl text-gold"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Investment Plan -->
-    <section id="investment" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="section-title center text-4xl md:text-5xl font-bold">投資計劃與商業模式</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto mt-6">
-                    總投資280億人民幣，分三階段實施，預計投資回收期8-10年，年收入80-100億人民幣
-                </p>
-            </div>
-
-            <!-- Investment Overview -->
-            <div class="card investment-highlight p-8 mb-12">
                 <div class="grid md:grid-cols-4 gap-6 text-center">
                     <div>
-                        <div class="text-4xl font-bold text-gold mb-2">280億</div>
-                        <div class="text-sm text-gray-300">總投資額 (RMB)</div>
+                        <i class="fas fa-globe text-3xl text-cyan-400 mb-3"></i>
+                        <h4 class="font-bold text-sm text-white mb-1" data-i18n="nexus_1">Quantum Hall</h4>
                     </div>
                     <div>
-                        <div class="text-4xl font-bold text-gold mb-2">8-10年</div>
-                        <div class="text-sm text-gray-300">投資回收期</div>
+                        <i class="fas fa-user-cog text-3xl text-cyan-400 mb-3"></i>
+                        <h4 class="font-bold text-sm text-white mb-1" data-i18n="nexus_2">Identity Forge</h4>
                     </div>
                     <div>
-                        <div class="text-4xl font-bold text-gold mb-2">13-15%</div>
-                        <div class="text-sm text-gray-300">項目整體IRR</div>
+                        <i class="fas fa-tree text-3xl text-cyan-400 mb-3"></i>
+                        <h4 class="font-bold text-sm text-white mb-1" data-i18n="nexus_3">World Tree Hub</h4>
                     </div>
                     <div>
-                        <div class="text-4xl font-bold text-gold mb-2">80-100億</div>
-                        <div class="text-sm text-gray-300">年收入 (RMB)</div>
+                        <i class="fas fa-clock text-3xl text-cyan-400 mb-3"></i>
+                        <h4 class="font-bold text-sm text-white mb-1" data-i18n="nexus_4">Time Spiral</h4>
                     </div>
                 </div>
             </div>
 
-            <!-- Investment Phases -->
-            <div class="grid md:grid-cols-3 gap-8 mb-16">
-                <div class="card p-6">
-                    <div class="text-center mb-6">
-                        <div class="w-16 h-16 mx-auto rounded-full bg-blue-500 bg-opacity-20 flex items-center justify-center mb-4">
-                            <span class="text-2xl font-bold text-blue-400">1</span>
-                        </div>
-                        <h3 class="text-xl font-bold">第一階段 (2026-2030)</h3>
-                        <div class="text-3xl font-bold text-accent">120億 RMB</div>
+            <!-- Zones Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Zone 1 -->
+                <div class="hud-panel p-6 group hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="openZoneModal('zone1')">
+                    <div class="hud-corner"></div>
+                    <div class="h-40 bg-black/50 mb-4 border border-gray-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition">
                     </div>
-                    <h4 class="font-semibold mb-3">核心體驗構建</h4>
-                    <ul class="text-sm text-gray-300 space-y-2">
-                        <li>• 土地獲取和場地準備：15億元</li>
-                        <li>• 核心建築和基礎設施：42億元</li>
-                        <li>• 起源之核與三個主題區：38億元</li>
-                        <li>• 核心技術系統開發：25億元</li>
-                    </ul>
+                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="zone1_title">Personal Cosmos</h3>
+                    <p class="text-gray-400 text-xs mb-4" data-i18n="zone1_desc">Deeply personalized experience where every visitor gets a completely unique story journey.</p>
+                    <span class="text-cyan-400 text-xs font-mono group-hover:underline">>> VIEW DETAILS</span>
                 </div>
 
-                <div class="card p-6">
-                    <div class="text-center mb-6">
-                        <div class="w-16 h-16 mx-auto rounded-full bg-purple-500 bg-opacity-20 flex items-center justify-center mb-4">
-                            <span class="text-2xl font-bold text-purple-400">2</span>
-                        </div>
-                        <h3 class="text-xl font-bold">第二階段 (2030-2033)</h3>
-                        <div class="text-3xl font-bold text-accent">100億 RMB</div>
+                <!-- Zone 2 -->
+                <div class="hud-panel p-6 group hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="openZoneModal('zone2')">
+                    <div class="hud-corner"></div>
+                    <div class="h-40 bg-black/50 mb-4 border border-gray-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1573152958734-1922c188fba3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition">
                     </div>
-                    <h4 class="font-semibold mb-3">生態系統發展</h4>
-                    <ul class="text-sm text-gray-300 space-y-2">
-                        <li>• 剩餘四個主題區建設：58億元</li>
-                        <li>• 住宿設施：22億元</li>
-                        <li>• 數字延伸系統：10億元</li>
-                        <li>• 技術和體驗優化：10億元</li>
-                    </ul>
+                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="zone2_title">Collective Cosmos</h3>
+                    <p class="text-gray-400 text-xs mb-4" data-i18n="zone2_desc">Quantum entangled group interactions forming deeply connected shared narratives.</p>
+                    <span class="text-cyan-400 text-xs font-mono group-hover:underline">>> VIEW DETAILS</span>
                 </div>
 
-                <div class="card p-6">
-                    <div class="text-center mb-6">
-                        <div class="w-16 h-16 mx-auto rounded-full bg-green-500 bg-opacity-20 flex items-center justify-center mb-4">
-                            <span class="text-2xl font-bold text-green-400">3</span>
-                        </div>
-                        <h3 class="text-xl font-bold">第三階段 (2033-2036)</h3>
-                        <div class="text-3xl font-bold text-accent">60億 RMB</div>
+                <!-- Zone 3 -->
+                <div class="hud-panel p-6 group hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="openZoneModal('zone3')">
+                    <div class="hud-corner"></div>
+                    <div class="h-40 bg-black/50 mb-4 border border-gray-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition">
                     </div>
-                    <h4 class="font-semibold mb-3">全球連接擴展</h4>
-                    <ul class="text-sm text-gray-300 space-y-2">
-                        <li>• 體驗升級和新內容：25億元</li>
-                        <li>• 園區外延伸平台：15億元</li>
-                        <li>• 研發與技術創新中心：12億元</li>
-                        <li>• 運營準備和市場拓展：8億元</li>
-                    </ul>
+                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="zone3_title">Trans-species Cosmos</h3>
+                    <p class="text-gray-400 text-xs mb-4" data-i18n="zone3_desc">Breaking human-centric entertainment to create interactive experiences with other life forms.</p>
+                    <span class="text-cyan-400 text-xs font-mono group-hover:underline">>> VIEW DETAILS</span>
                 </div>
-            </div>
 
-            <!-- Revenue Model -->
-            <div class="mb-16">
-                <h3 class="text-3xl font-bold text-center mb-12">多元化收入模式</h3>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="card p-6">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-ticket-alt text-2xl text-accent mr-3"></i>
-                            <div>
-                                <h4 class="font-bold">門票與會員收入</h4>
-                                <div class="text-accent">35%</div>
-                            </div>
-                        </div>
-                        <ul class="text-sm text-gray-300 space-y-1">
-                            <li>• 標準入園券：480-680元/人</li>
-                            <li>• 高級體驗通行證：880-1280元/人</li>
-                            <li>• 年度會員：3800-12800元/人</li>
-                            <li>• VIP定制會員：25000-100000元/人</li>
-                        </ul>
+                <!-- Zone 4 -->
+                <div class="hud-panel p-6 group hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="openZoneModal('zone4')">
+                    <div class="hud-corner"></div>
+                    <div class="h-40 bg-black/50 mb-4 border border-gray-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition">
                     </div>
-
-                    <div class="card p-6">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-bed text-2xl text-accent mr-3"></i>
-                            <div>
-                                <h4 class="font-bold">住宿收入</h4>
-                                <div class="text-accent">20%</div>
-                            </div>
-                        </div>
-                        <ul class="text-sm text-gray-300 space-y-1">
-                            <li>• 異度空間酒店：1800-5800元/晚</li>
-                            <li>• 特色主題住宿：1200-3800元/晚</li>
-                            <li>• 度假公寓租賃：3800-12000元/週</li>
-                        </ul>
-                    </div>
-
-                    <div class="card p-6">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-utensils text-2xl text-accent mr-3"></i>
-                            <div>
-                                <h4 class="font-bold">餐飲與零售</h4>
-                                <div class="text-accent">15%</div>
-                            </div>
-                        </div>
-                        <ul class="text-sm text-gray-300 space-y-1">
-                            <li>• 主題餐廳消費：人均300-600元</li>
-                            <li>• 特色小吃與飲品：人均150-300元</li>
-                            <li>• 定制化零售商品：客單價500-2000元</li>
-                        </ul>
-                    </div>
-
-                    <div class="card p-6">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-mobile-alt text-2xl text-accent mr-3"></i>
-                            <div>
-                                <h4 class="font-bold">數字內容與服務</h4>
-                                <div class="text-accent">15%</div>
-                            </div>
-                        </div>
-                        <ul class="text-sm text-gray-300 space-y-1">
-                            <li>• 領航員應用訂閱：98-298元/月</li>
-                            <li>• 數字資產購買：50-1000元/件</li>
-                            <li>• 個人化內容創作：500-10000元/項</li>
-                        </ul>
-                    </div>
-
-                    <div class="card p-6">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-handshake text-2xl text-accent mr-3"></i>
-                            <div>
-                                <h4 class="font-bold">商業合作與IP授權</h4>
-                                <div class="text-accent">15%</div>
-                            </div>
-                        </div>
-                        <ul class="text-sm text-gray-300 space-y-1">
-                            <li>• 品牌合作體驗區：5000萬-2億元/年</li>
-                            <li>• IP授權與衍生產品：1億-3億元/年</li>
-                            <li>• 技術授權與輸出：0.5億-2億元/年</li>
-                        </ul>
-                    </div>
-
-                    <div class="card p-6">
-                        <div class="flex items-center mb-4">
-                            <i class="fas fa-coins text-2xl text-accent mr-3"></i>
-                            <div>
-                                <h4 class="font-bold">創新收益模式</h4>
-                                <div class="text-accent">新興</div>
-                            </div>
-                        </div>
-                        <ul class="text-sm text-gray-300 space-y-1">
-                            <li>• 體驗資產經濟</li>
-                            <li>• 訪客創造內容版稅分成</li>
-                            <li>• 個人宇宙資產交易平台</li>
-                            <li>• 體驗數據價值化</li>
-                        </ul>
-                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="zone4_title">Elemental Cosmos</h3>
+                    <p class="text-gray-400 text-xs mb-4" data-i18n="zone4_desc">Focusing on elemental forces, allowing visitors to interact with Fire, Water, Earth, and Air.</p>
+                    <span class="text-cyan-400 text-xs font-mono group-hover:underline">>> VIEW DETAILS</span>
                 </div>
-            </div>
 
-            <!-- Funding Structure -->
-            <div class="card p-8">
-                <h3 class="text-2xl font-bold mb-6 text-center">資金構成</h3>
-                <div class="grid md:grid-cols-5 gap-4 text-center">
-                    <div class="p-4 rounded-lg bg-blue-500 bg-opacity-20">
-                        <div class="text-2xl font-bold text-blue-400 mb-2">20%</div>
-                        <div class="text-sm">政府支持與政策性資金</div>
-                        <div class="text-xs text-gray-400 mt-1">56億元</div>
+                <!-- Zone 5 -->
+                <div class="hud-panel p-6 group hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="openZoneModal('zone5')">
+                    <div class="hud-corner"></div>
+                    <div class="h-40 bg-black/50 mb-4 border border-gray-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551808525-51a94da548ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition">
                     </div>
-                    <div class="p-4 rounded-lg bg-purple-500 bg-opacity-20">
-                        <div class="text-2xl font-bold text-purple-400 mb-2">35%</div>
-                        <div class="text-sm">戰略投資者股權投資</div>
-                        <div class="text-xs text-gray-400 mt-1">98億元</div>
+                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="zone5_title">Digital Cosmos</h3>
+                    <p class="text-gray-400 text-xs mb-4" data-i18n="zone5_desc">Exploring the digital-physical boundary, focusing on data, code, and VR possibilities.</p>
+                    <span class="text-cyan-400 text-xs font-mono group-hover:underline">>> VIEW DETAILS</span>
+                </div>
+
+                <!-- Zone 6 -->
+                <div class="hud-panel p-6 group hover:-translate-y-1 transition duration-300 cursor-pointer" onclick="openZoneModal('zone6')">
+                    <div class="hud-corner"></div>
+                    <div class="h-40 bg-black/50 mb-4 border border-gray-800 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition">
                     </div>
-                    <div class="p-4 rounded-lg bg-green-500 bg-opacity-20">
-                        <div class="text-2xl font-bold text-green-400 mb-2">15%</div>
-                        <div class="text-sm">行業合作夥伴投資</div>
-                        <div class="text-xs text-gray-400 mt-1">42億元</div>
-                    </div>
-                    <div class="p-4 rounded-lg bg-yellow-500 bg-opacity-20">
-                        <div class="text-2xl font-bold text-yellow-400 mb-2">20%</div>
-                        <div class="text-sm">銀行貸款</div>
-                        <div class="text-xs text-gray-400 mt-1">56億元</div>
-                    </div>
-                    <div class="p-4 rounded-lg bg-red-500 bg-opacity-20">
-                        <div class="text-2xl font-bold text-red-400 mb-2">10%</div>
-                        <div class="text-sm">債券發行</div>
-                        <div class="text-xs text-gray-400 mt-1">28億元</div>
-                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2" data-i18n="zone6_title">Eternal Cosmos</h3>
+                    <p class="text-gray-400 text-xs mb-4" data-i18n="zone6_desc">Focusing on time, memory, and legacy, creating a persistent personal narrative universe.</p>
+                    <span class="text-cyan-400 text-xs font-mono group-hover:underline">>> VIEW DETAILS</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Development Timeline -->
-    <section id="timeline" class="py-20">
-        <div class="container mx-auto px-4">
+    <!-- Experience Features -->
+    <section id="experience" class="py-24 bg-black/50">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="section-title center text-4xl md:text-5xl font-bold">發展路線圖</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto mt-6">
-                    從2026年開始建設到2036年全球連接擴展，十年發展歷程打造革命性娛樂生態系統
+                <h2 class="font-cyber text-3xl lg:text-5xl font-bold mb-6" data-i18n="exp_title">Revolutionary Experience</h2>
+                <p class="text-gray-400 max-w-3xl mx-auto" data-i18n="exp_desc">
+                    World404 redefines how humans interact with technology, nature, and community.
                 </p>
             </div>
 
-            <div class="max-w-4xl mx-auto">
-                <div class="timeline-item">
-                    <div class="card p-6">
-                        <div class="flex items-center mb-4">
-                            <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium mr-4">2026-2030</span>
-                            <h3 class="text-2xl font-bold">第一階段：核心體驗構建</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="hud-panel p-6 text-center">
+                    <i class="fas fa-brain text-3xl text-cyan-400 mb-4"></i>
+                    <h3 class="text-lg font-bold text-white mb-2" data-i18n="feat1_title">Dynamic Story Gen</h3>
+                    <p class="text-gray-400 text-xs" data-i18n="feat1_desc">Unique, non-repeatable journeys generated in real-time based on emotions and choices.</p>
+                </div>
+                <div class="hud-panel p-6 text-center">
+                    <i class="fas fa-users-cog text-3xl text-purple-400 mb-4"></i>
+                    <h3 class="text-lg font-bold text-white mb-2" data-i18n="feat2_title">Entanglement</h3>
+                    <p class="text-gray-400 text-xs" data-i18n="feat2_desc">Visitor behaviors affect each other, forming a complex interactive network.</p>
+                </div>
+                <div class="hud-panel p-6 text-center">
+                    <i class="fas fa-leaf text-3xl text-green-400 mb-4"></i>
+                    <h3 class="text-lg font-bold text-white mb-2" data-i18n="feat3_title">Bio-Interaction</h3>
+                    <p class="text-gray-400 text-xs" data-i18n="feat3_desc">Integrating non-human life forms as narrative participants.</p>
+                </div>
+                <div class="hud-panel p-6 text-center">
+                    <i class="fas fa-infinity text-3xl text-pink-400 mb-4"></i>
+                    <h3 class="text-lg font-bold text-white mb-2" data-i18n="feat4_title">Persistent Universe</h3>
+                    <p class="text-gray-400 text-xs" data-i18n="feat4_desc">Experience continues evolving in the digital space after leaving the park.</p>
+                </div>
+                <div class="hud-panel p-6 text-center">
+                    <i class="fas fa-yin-yang text-3xl text-white mb-4"></i>
+                    <h3 class="text-lg font-bold text-white mb-2" data-i18n="feat5_title">Eastern Philosophy</h3>
+                    <p class="text-gray-400 text-xs" data-i18n="feat5_desc">Integrating traditional philosophy with frontier technology for unique interactions.</p>
+                </div>
+                <div class="hud-panel p-6 text-center">
+                    <i class="fas fa-globe-asia text-3xl text-blue-400 mb-4"></i>
+                    <h3 class="text-lg font-bold text-white mb-2" data-i18n="feat6_title">Digital Aesthetics</h3>
+                    <p class="text-gray-400 text-xs" data-i18n="feat6_desc">Digital realization of traditional Jiangnan garden design philosophy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology -->
+    <section id="technology" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-cyber text-3xl lg:text-5xl font-bold mb-6" data-i18n="tech_title">Core Technology</h2>
+                <p class="text-gray-400 max-w-3xl mx-auto" data-i18n="tech_desc">
+                    Five breakthrough systems enabling millisecond-level personalized interaction.
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Tech 1 -->
+                <div class="hud-panel p-6">
+                    <div class="flex flex-col md:flex-row items-center gap-6">
+                        <div class="w-full md:w-1/4 text-center">
+                            <i class="fas fa-microchip text-5xl text-cyan-400"></i>
                         </div>
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <h4 class="font-semibold mb-3 text-accent">基礎設施開發</h4>
-                                <ul class="text-sm text-gray-300 space-y-2">
-                                    <li>• 土地準備與環境評估</li>
-                                    <li>• 核心建築群施工</li>
-                                    <li>• 基礎技術平台部署</li>
-                                    <li>• 公共設施與配套建設</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-3 text-accent">體驗原型與測試</h4>
-                                <ul class="text-sm text-gray-300 space-y-2">
-                                    <li>• 核心體驗概念驗證</li>
-                                    <li>• 封閉用戶測試循環</li>
-                                    <li>• 技術系統壓力測試</li>
-                                    <li>• 敘事體驗可行性驗證</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="mt-4 p-4 bg-blue-500 bg-opacity-10 rounded-lg">
-                            <div class="flex items-center">
-                                <i class="fas fa-flag text-blue-400 mr-3"></i>
-                                <span class="font-medium">里程碑：2030年正式開園，起源之核與三個主題區投入運營</span>
+                        <div class="w-full md:w-3/4">
+                            <h3 class="text-xl font-bold text-white mb-2" data-i18n="syst1_title">Real-time Interaction Engine</h3>
+                            <p class="text-gray-400 text-sm mb-4" data-i18n="syst1_desc">Core neural network achieving millisecond-level response for deep personalization.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs text-gray-500 font-mono">
+                                <div><i class="fas fa-check text-cyan-400 mr-2"></i> 5000+ Edge Nodes</div>
+                                <div><i class="fas fa-check text-cyan-400 mr-2"></i> Multi-modal Sensing</div>
+                                <div><i class="fas fa-check text-cyan-400 mr-2"></i> Emotion Analysis</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="card p-6">
-                        <div class="flex items-center mb-4">
-                            <span class="bg-purple-500 text-white px-3 py-1 rounded-full text-sm font-medium mr-4">2030-2033</span>
-                            <h3 class="text-2xl font-bold">第二階段：生態系統發展</h3>
+                <!-- Tech 2 -->
+                <div class="hud-panel p-6 border-purple-500/30">
+                    <div class="flex flex-col md:flex-row items-center gap-6">
+                        <div class="w-full md:w-1/4 text-center">
+                            <i class="fas fa-book-open text-5xl text-purple-400"></i>
                         </div>
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <h4 class="font-semibold mb-3 text-accent">體驗深化與擴展</h4>
-                                <ul class="text-sm text-gray-300 space-y-2">
-                                    <li>• 剩餘四個主題區建設完成</li>
-                                    <li>• 體驗連接系統全面部署</li>
-                                    <li>• 敘事複雜度提升</li>
-                                    <li>• 長期體驗循環優化</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-3 text-accent">數字生態構建</h4>
-                                <ul class="text-sm text-gray-300 space-y-2">
-                                    <li>• 移動平台生態完善</li>
-                                    <li>• 家庭延伸設備大規模部署</li>
-                                    <li>• 體驗數據平台成熟</li>
-                                    <li>• 數字資產交易系統啟動</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="mt-4 p-4 bg-purple-500 bg-opacity-10 rounded-lg">
-                            <div class="flex items-center">
-                                <i class="fas fa-rocket text-purple-400 mr-3"></i>
-                                <span class="font-medium">里程碑：完整體驗生態系統建成，創作者經濟培育成功</span>
+                        <div class="w-full md:w-3/4">
+                            <h3 class="text-xl font-bold text-white mb-2" data-i18n="syst2_title">Quantum Narrative Network</h3>
+                            <p class="text-gray-400 text-sm mb-4" data-i18n="syst2_desc">Manages narrative evolution, creating infinite branching personalized universes.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs text-gray-500 font-mono">
+                                <div><i class="fas fa-check text-purple-400 mr-2"></i> Recursive Neural Model</div>
+                                <div><i class="fas fa-check text-purple-400 mr-2"></i> Probability Mgmt</div>
+                                <div><i class="fas fa-check text-purple-400 mr-2"></i> Dynamic Branching</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="card p-6">
-                        <div class="flex items-center mb-4">
-                            <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium mr-4">2033-2036</span>
-                            <h3 class="text-2xl font-bold">第三階段：全球連接擴展</h3>
+                <!-- Tech 3 -->
+                <div class="hud-panel p-6 border-green-500/30">
+                    <div class="flex flex-col md:flex-row items-center gap-6">
+                        <div class="w-full md:w-1/4 text-center">
+                            <i class="fas fa-heartbeat text-5xl text-green-400"></i>
                         </div>
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <h4 class="font-semibold mb-3 text-accent">體驗邊界突破</h4>
-                                <ul class="text-sm text-gray-300 space-y-2">
-                                    <li>• 跨地域體驗連接實現</li>
-                                    <li>• 虛擬分園區建立</li>
-                                    <li>• 全球用戶接入系統成熟</li>
-                                    <li>• 多語言多文化適配完成</li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-3 text-accent">技術輸出與合作</h4>
-                                <ul class="text-sm text-gray-300 space-y-2">
-                                    <li>• 技術授權模式成熟</li>
-                                    <li>• 全球合作夥伴網絡建立</li>
-                                    <li>• 技術標準制定與推廣</li>
-                                    <li>• 聯合研發項目啟動</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="mt-4 p-4 bg-green-500 bg-opacity-10 rounded-lg">
-                            <div class="flex items-center">
-                                <i class="fas fa-globe text-green-400 mr-3"></i>
-                                <span class="font-medium">里程碑：成為全球娛樂科技標杆，影響力國際化</span>
+                        <div class="w-full md:w-3/4">
+                            <h3 class="text-xl font-bold text-white mb-2" data-i18n="syst3_title">Biometric Fusion System</h3>
+                            <p class="text-gray-400 text-sm mb-4" data-i18n="syst3_desc">Seamless connection between humans, tech, and environment driven by bio-feedback.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs text-gray-500 font-mono">
+                                <div><i class="fas fa-check text-green-400 mr-2"></i> Non-invasive Monitor</div>
+                                <div><i class="fas fa-check text-green-400 mr-2"></i> Cross-species Signal</div>
+                                <div><i class="fas fa-check text-green-400 mr-2"></i> Eco-Adaptation</div>
                             </div>
                         </div>
                     </div>
@@ -1467,619 +675,512 @@
         </div>
     </section>
 
-    <!-- Social Impact -->
-    <section class="py-20 bg-gray-900">
-        <div class="container mx-auto px-4">
+    <!-- Investment & Timeline -->
+    <section id="investment" class="py-24 bg-black/50">
+        <div class="container mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="section-title center text-4xl md:text-5xl font-bold">社會與文化影響</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto mt-6">
-                    World404不僅是商業項目，更是推動創意文化產業發展、技術與藝術融合的重要平台
+                <h2 class="font-cyber text-3xl lg:text-5xl font-bold mb-6" data-i18n="invest_title">Investment & Roadmap</h2>
+                <p class="text-gray-400 max-w-3xl mx-auto" data-i18n="invest_desc">
+                    28 Billion RMB Total Investment. 3 Phases. 8-10 Year Payback Period.
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8 mb-16">
-                <div class="card p-8 text-center">
-                    <i class="fas fa-palette text-4xl text-accent mb-6"></i>
-                    <h3 class="text-xl font-bold mb-4">創意文化產業貢獻</h3>
-                    <div class="space-y-3 text-sm text-gray-300">
-                        <div class="flex justify-between">
-                            <span>直接創造就業</span>
-                            <span class="font-semibold">8,000+ 職位</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>支持內容創作者</span>
-                            <span class="font-semibold">100,000+ 人</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>IP孵化與文化輸出</span>
-                            <span class="font-semibold">全球影響</span>
-                        </div>
+            <!-- Investment Data -->
+            <div class="hud-panel p-8 mb-16 border-yellow-500/50">
+                <div class="grid md:grid-cols-4 gap-6 text-center">
+                    <div>
+                        <div class="text-3xl font-bold text-yellow-400 mb-1">28B</div>
+                        <div class="text-xs text-gray-500 uppercase" data-i18n="inv_total">Total (RMB)</div>
                     </div>
-                </div>
-
-                <div class="card p-8 text-center">
-                    <i class="fas fa-cogs text-4xl text-accent mb-6"></i>
-                    <h3 class="text-xl font-bold mb-4">科技與藝術融合</h3>
-                    <div class="space-y-3 text-sm text-gray-300">
-                        <div class="flex justify-between">
-                            <span>技術創新應用場景</span>
-                            <span class="font-semibold">AI+IoT+生物感知</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>跨界合作模式</span>
-                            <span class="font-semibold">新組織形式</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>交互設計進步</span>
-                            <span class="font-semibold">行業標準</span>
-                        </div>
+                    <div>
+                        <div class="text-3xl font-bold text-yellow-400 mb-1">8-10 Y</div>
+                        <div class="text-xs text-gray-500 uppercase" data-i18n="inv_payback">Payback</div>
                     </div>
-                </div>
-
-                <div class="card p-8 text-center">
-                    <i class="fas fa-leaf text-4xl text-accent mb-6"></i>
-                    <h3 class="text-xl font-bold mb-4">環境可持續發展</h3>
-                    <div class="space-y-3 text-sm text-gray-300">
-                        <div class="flex justify-between">
-                            <span>能源自給自足</span>
-                            <span class="font-semibold">90% 可再生</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>水資源循環利用</span>
-                            <span class="font-semibold">95% 減少消耗</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>碳中和目標</span>
-                            <span class="font-semibold">2035年實現</span>
-                        </div>
+                    <div>
+                        <div class="text-3xl font-bold text-yellow-400 mb-1">15%</div>
+                        <div class="text-xs text-gray-500 uppercase" data-i18n="inv_irr">IRR</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-yellow-400 mb-1">10B</div>
+                        <div class="text-xs text-gray-500 uppercase" data-i18n="inv_rev">Annual Rev</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Cultural Integration -->
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="card p-8">
-                    <h3 class="text-2xl font-bold mb-6">
-                        <i class="fas fa-yin-yang text-accent mr-3"></i>東方文化與現代科技融合
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="border-l-4 border-accent pl-4">
-                            <h4 class="font-semibold mb-2">傳統哲學現代化詮釋</h4>
-                            <p class="text-sm text-gray-300">將太極陰陽、五行相生相克、道法自然等傳統概念重新詮釋為交互設計原則</p>
-                        </div>
-                        <div class="border-l-4 border-accent pl-4">
-                            <h4 class="font-semibold mb-2">文化自信與創新展示</h4>
-                            <p class="text-sm text-gray-300">成為中國文化科技融合的旗艦案例，展示文化傳承與技術創新的平衡發展</p>
-                        </div>
-                        <div class="border-l-4 border-accent pl-4">
-                            <h4 class="font-semibold mb-2">全球文化對話平台</h4>
-                            <p class="text-sm text-gray-300">促進國際文化交流和理解，成為連接全球創意社區的重要橋樑</p>
-                        </div>
+            <!-- Timeline -->
+            <div class="relative max-w-4xl mx-auto pl-8 md:pl-0" id="timeline">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item flex flex-col md:flex-row items-center mb-12 relative">
+                    <div class="timeline-dot"></div>
+                    <div class="w-full md:w-1/2 p-6 md:pr-12 md:text-right">
+                        <span class="bg-blue-900 text-blue-400 text-xs px-2 py-1 rounded mb-2 inline-block">2026-2030</span>
+                        <h3 class="text-xl font-bold text-white mb-2" data-i18n="phase1_title">Phase 1: Core Experience</h3>
+                        <p class="text-gray-400 text-sm" data-i18n="phase1_desc">Infrastructure, Core Buildings, Origin Nexus + 3 Zones, Core Tech.</p>
+                        <div class="text-cyan-400 font-bold mt-2">12B RMB</div>
+                    </div>
+                    <div class="w-full md:w-1/2"></div>
+                </div>
+
+                <div class="timeline-item flex flex-col md:flex-row items-center mb-12 relative">
+                    <div class="timeline-dot bg-purple-900 border-purple-500"></div>
+                    <div class="w-full md:w-1/2"></div>
+                    <div class="w-full md:w-1/2 p-6 md:pl-12">
+                        <span class="bg-purple-900 text-purple-400 text-xs px-2 py-1 rounded mb-2 inline-block">2030-2033</span>
+                        <h3 class="text-xl font-bold text-white mb-2" data-i18n="phase2_title">Phase 2: Ecosystem</h3>
+                        <p class="text-gray-400 text-sm" data-i18n="phase2_desc">Remaining 4 Zones, Accommodations, Digital Extensions.</p>
+                        <div class="text-purple-400 font-bold mt-2">10B RMB</div>
                     </div>
                 </div>
 
-                <div class="card p-8">
-                    <h3 class="text-2xl font-bold mb-6">
-                        <i class="fas fa-graduation-cap text-accent mr-3"></i>教育與人才培養
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="border-l-4 border-accent pl-4">
-                            <h4 class="font-semibold mb-2">跨學科人才培養</h4>
-                            <p class="text-sm text-gray-300">成為培養藝術、技術、敘事、設計、心理學等交叉領域人才的搖籃</p>
-                        </div>
-                        <div class="border-l-4 border-accent pl-4">
-                            <h4 class="font-semibold mb-2">科學素養提升</h4>
-                            <p class="text-sm text-gray-300">通過沉浸式體驗提升公眾科學素養，推廣科學思維和創新精神</p>
-                        </div>
-                        <div class="border-l-4 border-accent pl-4">
-                            <h4 class="font-semibold mb-2">環境意識教育</h4>
-                            <p class="text-sm text-gray-300">培養訪客的環境保護意識和跨物種同理心，促進可持續發展理念</p>
-                        </div>
+                <div class="timeline-item flex flex-col md:flex-row items-center relative">
+                    <div class="timeline-dot bg-green-900 border-green-500"></div>
+                    <div class="w-full md:w-1/2 p-6 md:pr-12 md:text-right">
+                        <span class="bg-green-900 text-green-400 text-xs px-2 py-1 rounded mb-2 inline-block">2033-2036</span>
+                        <h3 class="text-xl font-bold text-white mb-2" data-i18n="phase3_title">Phase 3: Global Expansion</h3>
+                        <p class="text-gray-400 text-sm" data-i18n="phase3_desc">Experience Upgrades, External Platforms, R&D Center.</p>
+                        <div class="text-green-400 font-bold mt-2">6B RMB</div>
                     </div>
+                    <div class="w-full md:w-1/2"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="section-title center text-4xl md:text-5xl font-bold">投資聯繫信息</h2>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto mt-6">
-                    歡迎各界投資者和合作夥伴加入World404的革命性旅程
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                <div class="card p-6 text-center">
-                    <i class="fas fa-dollar-sign text-3xl text-accent mb-4"></i>
-                    <h3 class="font-bold mb-2">投資諮詢</h3>
-                    <div class="text-sm text-gray-300">
+    <!-- Contact & Footer -->
+    <footer id="contact" class="bg-black border-t border-gray-900 pt-16 pb-10">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="font-cyber text-2xl font-bold text-white mb-4">WORLD<span class="text-cyan-400">404</span></div>
+                    <p class="text-gray-500 text-xs mb-4" data-i18n="footer_desc">Redefining human experience and cultural evolution through infinite interactive universes.</p>
+                    <div class="flex gap-4 text-gray-400">
+                        <a href="#" class="hover:text-cyan-400"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-cyan-400"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="hover:text-cyan-400"><i class="fab fa-weixin"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-white mb-4 text-sm" data-i18n="contact_inv">Investment</h4>
+                    <div class="text-gray-500 text-xs space-y-1">
                         <div>investment@404.world</div>
                     </div>
                 </div>
 
-                <div class="card p-6 text-center">
-                    <i class="fas fa-handshake text-3xl text-accent mb-4"></i>
-                    <h3 class="font-bold mb-2">合作機會</h3>
-                    <div class="text-sm text-gray-300">
+                <div>
+                    <h4 class="font-bold text-white mb-4 text-sm" data-i18n="contact_biz">Partnership</h4>
+                    <div class="text-gray-500 text-xs space-y-1">
                         <div>partnership@404.world</div>
                     </div>
                 </div>
 
-                <div class="card p-6 text-center">
-                    <i class="fas fa-newspaper text-3xl text-accent mb-4"></i>
-                    <h3 class="font-bold mb-2">媒體與公關</h3>
-                    <div class="text-sm text-gray-300">
-                        <div>media@404.world</div>
+                <div>
+                    <h4 class="font-bold text-white mb-4 text-sm" data-i18n="contact_addr">HQ Address</h4>
+                    <div class="text-gray-500 text-xs">
+                        Hangzhou Bay New Zone,<br>Zhejiang Province, China
                     </div>
-                </div>
-
-                <div class="card p-6 text-center">
-                    <i class="fas fa-laptop-code text-3xl text-accent mb-4"></i>
-                    <h3 class="font-bold mb-2">技術合作</h3>
-                    <div class="text-sm text-gray-300">
-                        <div>technology@404.world</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Project Address -->
-            <div class="card p-8 text-center">
-                <h3 class="text-2xl font-bold mb-4">項目總部</h3>
-                <div class="text-xl text-gray-300 mb-6">
-                    <i class="fas fa-map-marker-alt text-accent mr-3"></i>
-                    中國浙江省杭州灣新區
-                </div>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    位於長三角一體化發展核心區，是連接上海、杭州、寧波三大核心城市的樞紐地帶，
-                    享受國家級戰略紅利和優越的交通條件。
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 bg-black">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <div class="logo-font text-2xl mb-4">WORLD404</div>
-                    <p class="text-gray-400 mb-4">
-                        無限互動宇宙的願景，重新定義人類體驗和文化演化的新篇章。
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-weibo"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-wechat"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">園區規劃</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white">起源之核</a></li>
-                        <li><a href="#" class="hover:text-white">七大主題宇宙</a></li>
-                        <li><a href="#" class="hover:text-white">住宿體驗</a></li>
-                        <li><a href="#" class="hover:text-white">餐飲服務</a></li>
-                        <li><a href="#" class="hover:text-white">零售體驗</a></li>
-                        <li><a href="#" class="hover:text-white">季節性活動</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">技術創新</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white">實時互動引擎</a></li>
-                        <li><a href="#" class="hover:text-white">量子敘事網絡</a></li>
-                        <li><a href="#" class="hover:text-white">生物融合系統</a></li>
-                        <li><a href="#" class="hover:text-white">環境智能網絡</a></li>
-                        <li><a href="#" class="hover:text-white">永續存在框架</a></li>
-                        <li><a href="#" class="hover:text-white">跨媒體擴展</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">投資與合作</h3>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white">投資機會</a></li>
-                        <li><a href="#" class="hover:text-white">戰略合作</a></li>
-                        <li><a href="#" class="hover:text-white">技術授權</a></li>
-                        <li><a href="#" class="hover:text-white">創作者平台</a></li>
-                        <li><a href="#" class="hover:text-white">法律文件</a></li>
-                        <li><a href="#" class="hover:text-white">聯繫我們</a></li>
-                    </ul>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2024 World404 項目開發團隊. 保留所有權利.</p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#" class="text-gray-500 text-sm hover:text-blue-400">隱私政策</a>
-                    <a href="#" class="text-gray-500 text-sm hover:text-blue-400">服務條款</a>
-                    <a href="#" class="text-gray-500 text-sm hover:text-blue-400">Cookie政策</a>
-                    <a href="#" class="text-gray-500 text-sm hover:text-blue-400">風險披露</a>
+            <div class="border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 font-mono">
+                <p>&copy; 2030 World404 Dev Team. All Rights Reserved.</p>
+                <div class="flex gap-4">
+                    <span>Privacy Policy</span>
+                    <span>Terms of Service</span>
                 </div>
-            </div>
-            
-            <div class="mt-8 card p-6">
-                <div class="text-center">
-                    <h3 class="font-semibold mb-2">訂閱項目動態</h3>
-                    <p class="text-gray-400 text-sm mb-4">獲取最新的項目進展、投資機會和開發動態</p>
-                    <div class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-                        <input type="email" placeholder="您的電子郵箱" class="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                        <button class="btn-primary px-4 py-2 rounded-lg">訂閱</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Legal Disclaimer -->
-            <div class="mt-8 text-center text-xs text-gray-500">
-                <p class="mb-2">
-                    本白皮書包含基於當前期望、估計、預測和假設的前瞻性陳述和預測。實際結果可能因市場條件、監管變化、技術發展等因素而有顯著差異。
-                </p>
-                <p>
-                    所有財務預測、訪客預測和收入估計都是初步的，可能根據詳細可行性研究進行修訂。投資涉及重大風險，潛在投資者應進行盡職調查並尋求專業建議。
-                </p>
             </div>
         </div>
     </footer>
 
-    <!-- Floating Action Buttons -->
-    <div class="fixed bottom-6 right-6 z-10 space-y-3">
-        <!-- Investment Inquiry Button -->
-        <button class="bg-gradient w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:opacity-90 transition">
-            <i class="fas fa-dollar-sign text-xl"></i>
-        </button>
-        
-        <!-- Scroll to Top Button -->
-        <button id="scrollToTop" class="bg-gray-800 w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-gray-700 transition">
-            <i class="fas fa-arrow-up text-xl"></i>
-        </button>
+    <!-- Zone Details Modal -->
+    <div id="zoneModal" class="zone-modal fixed inset-0 z-[2000] flex items-center justify-center bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="modal-content relative w-[90%] max-w-4xl max-h-[90vh] overflow-y-auto bg-[#0a0a0e] border border-cyan-400 shadow-[0_0_50px_rgba(0,243,255,0.2)] transform scale-95 transition-transform duration-300">
+            <button onclick="closeZoneModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white z-10 text-xl cursor-pointer p-2">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modalBody" class="p-8 md:p-12">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
     </div>
 
-    <!-- Progress Bar -->
-    <div class="fixed top-0 left-0 w-full h-1 bg-gray-800 z-50">
-        <div id="progressBar" class="h-full bg-gradient transition-all duration-300" style="width: 0%"></div>
-    </div>
-
+    <!-- Script -->
     <script>
-        // Create optimized data streams
-        function createDataStreams() {
-            for (let i = 0; i < 3; i++) {
+        const translations = {
+            nav_home: { en: "Home", tc: "首頁" },
+            nav_zones: { en: "Zones", tc: "主題區域" },
+            nav_experience: { en: "Experience", tc: "體驗特色" },
+            nav_tech: { en: "Tech", tc: "核心技術" },
+            nav_invest: { en: "Invest", tc: "投資計劃" },
+            nav_timeline: { en: "Roadmap", tc: "發展路線" },
+            nav_contact: { en: "Contact Us", tc: "聯絡我們" },
+            nav_preorder: { en: "Pre-Order", tc: "預購" },
+
+            hero_status: { en: "SYSTEM ONLINE // HANGZHOU BAY", tc: "系統在線 // 杭州灣新區" },
+            hero_title: { 
+                en: "World404<br><span class='text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500'>Infinite Interaction Universe</span>", 
+                tc: "World404<br><span class='text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500'>無限互動宇宙</span>" 
+            },
+            hero_desc: {
+                en: "The world's first revolutionary quantum narrative theme park. Located in Hangzhou Bay New Zone, investing 28 billion RMB to build a true multiverse interactive experience ecosystem.",
+                tc: "全球首個革命性的量子敘事主題樂園。位於杭州灣新區，投資280億人民幣，打造真正的多元宇宙互動體驗生態系統。"
+            },
+            btn_invest: { en: "Investment Opportunities", tc: "投資機會" },
+            btn_explore: { en: "Explore Zones", tc: "探索園區" },
+            
+            stat_invest_val: { en: "28B", tc: "280億" },
+            stat_invest_label: { en: "Total Investment (RMB)", tc: "總投資額 (RMB)" },
+            stat_visitors_val: { en: "12M", tc: "1200萬" },
+            stat_visitors_label: { en: "Annual Visitors", tc: "年接待量 (人次)" },
+            stat_area_label: { en: "Hectares Area", tc: "佔地面積 (公頃)" },
+            stat_open_label: { en: "Grand Opening", tc: "正式開園" },
+
+            overview_title: { en: "Project Overview", tc: "項目概述" },
+            overview_desc: {
+                en: "World404 is not just a theme park, but a multi-dimensional interactive experience ecosystem that breaks traditional boundaries, transforming every visitor into an active creator.",
+                tc: "World404不僅是一個主題樂園，而是一個打破傳統邊界的多維互動體驗生態系統，將每位訪客轉變為體驗的主動創造者。"
+            },
+            innovation_title: { en: "Core Innovations", tc: "核心創新理念" },
+            innov1_title: { en: "Quantum Narrative", tc: "量子敘事" },
+            innov1_desc: { 
+                en: "Infinite possibilities exist in every moment. Every decision creates a new reality branch. There are no 'right' or 'wrong' choices.", 
+                tc: "每個時刻都存在無限可能性，每個決定都創造新的現實分支，體驗沒有「正確」或「錯誤」的選擇。" 
+            },
+            innov2_title: { en: "Collective Entanglement", tc: "群體量子糾纏" },
+            innov2_desc: { 
+                en: "Visitors' behaviors, emotions, and decisions affect each other, forming an entangled experience network.", 
+                tc: "訪客的行為、情緒和決定相互影響，形成量子糾纏的體驗網絡，每個人既是自己故事的主角，也是他人故事的變量。" 
+            },
+            innov3_title: { en: "Trans-species Empathy", tc: "跨物種共感" },
+            innov3_desc: { 
+                en: "Pioneering the inclusion of non-human behavioral patterns and emotional reactions into narrative generation.", 
+                tc: "首創將非人類生物的行為模式、情緒反應納入敘事生成，創造真正的跨物種共享體驗。" 
+            },
+            highlights_title: { en: "Project Highlights", tc: "項目亮點" },
+            hl_zones: { en: "Themed Zones", tc: "主題區域" },
+            hl_core: { en: "Core Driven", tc: "核心驅動" },
+            hl_evo: { en: "Continuous Evolution", tc: "持續演化" },
+            hl_inf: { en: "Infinite Possibility", tc: "無限可能" },
+
+            zones_title: { en: "Seven Themed Universes", tc: "七大主題宇宙" },
+            zones_desc: { 
+                en: "Each themed zone is a unique narrative space, radiating from the central 'Origin Nexus', creating a metaphor for the universe of infinite exploration.", 
+                tc: "每個主題區域都是獨特的敘事空間，從中央「起源之核」向外輻射，創造無限探索的宇宙隱喻。" 
+            },
+            nexus_title: { en: "Origin Nexus", tc: "起源之核 Origin Nexus" },
+            nexus_desc: { 
+                en: "The physical and conceptual center of the park, a massive spherical complex serving as the gateway to infinite possibilities.", 
+                tc: "園區的物理和概念中心，巨大的球形建築群，作為通往無限可能性的門戶。" 
+            },
+            nexus_1: { en: "Quantum Hall", tc: "量子大廳" },
+            nexus_2: { en: "Identity Forge", tc: "身份熔爐" },
+            nexus_3: { en: "World Tree Hub", tc: "世界樹中樞" },
+            nexus_4: { en: "Time Spiral", tc: "時間螺旋" },
+            
+            zone1_title: { en: "Personal Cosmos", tc: "個人宇宙區" },
+            zone1_desc: { en: "Deeply personalized experience where every visitor gets a completely unique story journey.", tc: "深度個性化體驗，每位訪客獲得完全獨特的故事旅程。" },
+            zone2_title: { en: "Collective Cosmos", tc: "群體宇宙區" },
+            zone2_desc: { en: "Quantum entangled group interactions forming deeply connected shared narratives.", tc: "創造量子糾纏式群體互動體驗，訪客形成深度關聯的共享敘事。" },
+            zone3_title: { en: "Trans-species Cosmos", tc: "跨物種宇宙區" },
+            zone3_desc: { en: "Breaking human-centric entertainment to create interactive experiences with other life forms.", tc: "突破人類中心娛樂形式，創造人類與其他生物共同參與的互動體驗。" },
+            zone4_title: { en: "Elemental Cosmos", tc: "元素宇宙區" },
+            zone4_desc: { en: "Focusing on elemental forces, allowing visitors to interact with Fire, Water, Earth, and Air.", tc: "專注自然元素力量，讓訪客與火、水、土、氣等基本元素互動。" },
+            zone5_title: { en: "Digital Cosmos", tc: "數字宇宙區" },
+            zone5_desc: { en: "Exploring the digital-physical boundary, focusing on data, code, and VR possibilities.", tc: "探索數字與物理邊界，專注數據、代碼和虛擬現實的可能性。" },
+            zone6_title: { en: "Eternal Cosmos", tc: "永恆宇宙區" },
+            zone6_desc: { en: "Focusing on time, memory, and legacy, creating a persistent personal narrative universe.", tc: "專注時間、記憶和傳承，創造超越物理園區邊界的持久個人敘事宇宙。" },
+
+            exp_title: { en: "Revolutionary Experience", tc: "革命性體驗特色" },
+            exp_desc: { en: "World404 redefines how humans interact with technology, nature, and community.", tc: "World404不僅提供娛樂，更是重新定義人類與技術、自然和社群的互動方式。" },
+            feat1_title: { en: "Dynamic Story Gen", tc: "動態故事生成" },
+            feat1_desc: { en: "Unique, non-repeatable journeys generated in real-time based on emotions and choices.", tc: "每位訪客的體驗都是獨一無二、不可重複的旅程，實時創建。" },
+            feat2_title: { en: "Entanglement", tc: "群體糾纏" },
+            feat2_desc: { en: "Visitor behaviors affect each other, forming a complex interactive network.", tc: "不同訪客的行為、情緒和決定相互影響，形成複雜網絡。" },
+            feat3_title: { en: "Bio-Interaction", tc: "跨物種互動" },
+            feat3_desc: { en: "Integrating non-human life forms as narrative participants.", tc: "首創將非人類生物作為敘事參與者。" },
+            feat4_title: { en: "Persistent Universe", tc: "持久宇宙" },
+            feat4_desc: { en: "Experience continues evolving in the digital space after leaving the park.", tc: "體驗不會在離開園區時結束，繼續在數字空間演化。" },
+            feat5_title: { en: "Eastern Philosophy", tc: "東方哲學" },
+            feat5_desc: { en: "Integrating traditional philosophy with frontier technology for unique interactions.", tc: "深度整合中國傳統哲學思想與前沿技術。" },
+            feat6_title: { en: "Digital Aesthetics", tc: "數字園林" },
+            feat6_desc: { en: "Digital realization of traditional Jiangnan garden design philosophy.", tc: "汲取江南園林設計哲學，通過數字技術實現。" },
+
+            tech_title: { en: "Core Technology", tc: "核心技術系統" },
+            tech_desc: { en: "Five breakthrough systems enabling millisecond-level personalized interaction.", tc: "基於五大突破性技術系統，實現毫秒級響應的深度個性化互動。" },
+            syst1_title: { en: "Real-time Interaction Engine", tc: "實時互動引擎" },
+            syst1_desc: { en: "Core neural network achieving millisecond-level response for deep personalization.", tc: "突破性的實時互動引擎，作為整個系統的核心神經網絡。" },
+            syst2_title: { en: "Quantum Narrative Network", tc: "量子敘事網絡" },
+            syst2_desc: { en: "Manages narrative evolution, creating infinite branching personalized universes.", tc: "負責生成、管理和演化故事體驗，創造無限分支敘事。" },
+            syst3_title: { en: "Biometric Fusion System", tc: "生物融合系統" },
+            syst3_desc: { en: "Seamless connection between humans, tech, and environment driven by bio-feedback.", tc: "創建人類與技術、環境之間的無縫連接。" },
+
+            invest_title: { en: "Investment & Roadmap", tc: "投資計劃與發展" },
+            invest_desc: { en: "28 Billion RMB Total Investment. 3 Phases. 8-10 Year Payback Period.", tc: "總投資280億人民幣，分三階段實施，預計投資回收期8-10年。" },
+            inv_total: { en: "Total (RMB)", tc: "總投資額 (RMB)" },
+            inv_payback: { en: "Payback", tc: "投資回收期" },
+            inv_irr: { en: "IRR", tc: "整體 IRR" },
+            inv_rev: { en: "Annual Rev", tc: "年收入 (RMB)" },
+            
+            phase1_title: { en: "Phase 1: Core Experience", tc: "第一階段：核心體驗" },
+            phase1_desc: { en: "Infrastructure, Core Buildings, Origin Nexus + 3 Zones, Core Tech.", tc: "基礎設施，核心建築，起源之核與三個主題區，核心技術。" },
+            phase2_title: { en: "Phase 2: Ecosystem", tc: "第二階段：生態發展" },
+            phase2_desc: { en: "Remaining 4 Zones, Accommodations, Digital Extensions.", tc: "剩餘四個主題區，住宿設施，數字延伸系統。" },
+            phase3_title: { en: "Phase 3: Global Expansion", tc: "第三階段：全球擴展" },
+            phase3_desc: { en: "Experience Upgrades, External Platforms, R&D Center.", tc: "體驗升級，園區外延伸平台，研發中心。" },
+
+            footer_desc: { en: "Redefining human experience and cultural evolution through infinite interactive universes.", tc: "無限互動宇宙的願景，重新定義人類體驗和文化演化的新篇章。" },
+            contact_inv: { en: "Investment", tc: "投資諮詢" },
+            contact_biz: { en: "Partnership", tc: "合作機會" },
+            contact_addr: { en: "HQ Address", tc: "項目總部" }
+        };
+
+        const zoneDetails = {
+            zone1: {
+                id: "personal",
+                title: { en: "Personal Cosmos", tc: "個人宇宙區" },
+                desc: {
+                    en: "A deeply introspective zone where the environment responds exclusively to you. Utilizing advanced biometric sensors and AI psychometrics, this zone crafts a unique narrative journey tailored to your subconscious desires and emotional state.",
+                    tc: "一個深度內省的區域，環境只對您做出反應。利用先進的生物識別傳感器和AI心理測量學，該區域為您量身定制獨特的敘事旅程，契合您的潛意識渴望和情緒狀態。"
+                },
+                features: {
+                    en: [
+                        "Mirror of Soul: AR reflections that show your digital avatar evolution.",
+                        "Memory Weaver: Interactive light installations that respond to your voice pitch and heart rate.",
+                        "Solo Quest: A customized puzzle track that adapts difficulty based on your biometric stress levels."
+                    ],
+                    tc: [
+                        "靈魂之鏡：展示您數字化身演變的AR映像。",
+                        "記憶編織者：響應您語音音調和心率的互動光裝置。",
+                        "單人任務：根據您的生物壓力水平調整難度的定制謎題路徑。"
+                    ]
+                }
+            },
+            zone2: {
+                id: "collective",
+                title: { en: "Collective Cosmos", tc: "群體宇宙區" },
+                desc: {
+                    en: "The hub of social entanglement. Here, individual actions ripple through the crowd. This zone uses swarm intelligence algorithms to create large-scale cooperative challenges and synchronized visual spectacles.",
+                    tc: "社交糾纏的中心。在這裡，個人的行為會在人群中產生漣漪。該區域使用群體智能算法創造大規模合作挑戰和同步視覺奇觀。"
+                },
+                features: {
+                    en: [
+                        "Resonance Arena: 100-person cooperative rhythm games influencing plaza lighting.",
+                        "Entanglement Bridge: Requires synchronized movement from strangers to activate pathways.",
+                        "Hive Mind AI: An overarching narrator that speaks to the crowd as a single entity."
+                    ],
+                    tc: [
+                        "共鳴競技場：百人合作節奏遊戲，影響廣場燈光。",
+                        "糾纏之橋：需要陌生人同步動作才能激活的路徑。",
+                        "蜂巢思維AI：將人群視為一個整體進行對話的宏大敘事者。"
+                    ]
+                }
+            },
+            zone3: {
+                id: "transspecies",
+                title: { en: "Trans-species Cosmos", tc: "跨物種宇宙區" },
+                desc: {
+                    en: "Bridging the gap between biological kingdoms. This zone integrates bio-digital interfaces with real flora and fauna, allowing visitors to 'communicate' with nature through interpreted data streams.",
+                    tc: "架起生物界之間的橋樑。該區域將生物數字接口與真實動植物整合，允許訪客通過解讀的數據流與自然進行「交流」。"
+                },
+                features: {
+                    en: [
+                        "Flora Synth: Touching plants triggers synthesized music based on their bio-electric signals.",
+                        "Avian Link: AR overlays translating bird calls into visual text or abstract art.",
+                        "Mycelium Network: Underground fiber-optics visualizing the 'wood wide web' of fungal connections."
+                    ],
+                    tc: [
+                        "植物合成器：觸摸植物會根據其生物電信號觸發合成音樂。",
+                        "鳥類連結：將鳥鳴轉化為視覺文字或抽象藝術的AR疊加層。",
+                        "菌絲網絡：地下光纖可視化真菌連接的「木維網」。"
+                    ]
+                }
+            },
+            zone4: {
+                id: "elemental",
+                title: { en: "Elemental Cosmos", tc: "元素宇宙區" },
+                desc: {
+                    en: "A raw, visceral zone dedicated to the fundamental forces: Earth, Water, Fire, and Air. Here, digital projection mapping creates impossible physics, allowing visitors to manipulate simulated elements.",
+                    tc: "一個原始、直觀的區域，致力於基本力量：地、水、火、風。在這裡，數字投影映射創造出不可能的物理現象，允許訪客操縱模擬元素。"
+                },
+                features: {
+                    en: [
+                        "Pyro-Kinesis Lab: Hand-tracking sensors allow you to control virtual firestorms.",
+                        "Hydro-Sculpt: Manipulate gravity-defying water columns with gestures.",
+                        "Terra-Form: Collaborative sandbox where users reshape mountains and valleys in real-time."
+                    ],
+                    tc: [
+                        "念力控火實驗室：手部追蹤傳感器讓您控制虛擬火焰風暴。",
+                        "水流雕塑：用手勢操縱反重力水柱。",
+                        "地形重塑：協作沙盒，用戶實時重塑山脈和峽谷。"
+                    ]
+                }
+            },
+            zone5: {
+                id: "digital",
+                title: { en: "Digital Cosmos", tc: "數字宇宙區" },
+                desc: {
+                    en: "The boundary where physical reality dissolves into code. This zone is a glitch-art paradise, featuring heavy use of VR, AR, and holographic technology to explore themes of data, simulation, and artificial consciousness.",
+                    tc: "物理現實消融為代碼的邊界。這是一個故障藝術天堂，大量使用VR、AR和全息技術來探索數據、模擬和人工意識的主題。"
+                },
+                features: {
+                    en: [
+                        "The Glitch Maze: A physical labyrinth where walls shift position in AR.",
+                        "Data Rain Plaza: Walk through streams of binary code without getting wet.",
+                        "Avatar Upload: Scan yourself to enter a massive digital aquarium as a 3D construct."
+                    ],
+                    tc: [
+                        "故障迷宮：物理迷宮，牆壁在AR中移動位置。",
+                        "數據雨廣場：穿過二進制代碼流而不被淋濕。",
+                        "化身上傳：掃描自己，作為3D構造體進入巨大的數字水族館。"
+                    ]
+                }
+            },
+            zone6: {
+                id: "eternal",
+                title: { en: "Eternal Cosmos", tc: "永恆宇宙區" },
+                desc: {
+                    en: "A contemplative space focusing on time, memory, and legacy. Using persistent data storage, this zone allows visitors to leave digital 'echoes' that remain for years, creating a cumulative history of the park.",
+                    tc: "一個專注於時間、記憶和傳承的沉思空間。利用持久數據存儲，該區域允許訪客留下持續數年的數字「回聲」，創造樂園的累積歷史。"
+                },
+                features: {
+                    en: [
+                        "Time Capsule Garden: Plant a digital message that unlocks for a specific person in the future.",
+                        "Echo Hall: Hear whispers of past visitors' messages as you walk through.",
+                        "Legacy Monument: A holographic tower displaying the names and avatars of all founding members."
+                    ],
+                    tc: [
+                        "時間膠囊花園：種植一條數字信息，在未來為特定的人解鎖。",
+                        "回聲大廳：走過時聽到過去訪客信息的低語。",
+                        "傳承紀念碑：全息塔展示所有創始成員的名字和化身。"
+                    ]
+                }
+            }
+        };
+
+        let currentLang = 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            // Update buttons style (Desktop)
+            const deskEn = document.getElementById('langEnDesk');
+            const deskTc = document.getElementById('langTcDesk');
+            
+            if (deskEn && deskTc) {
+                if(lang === 'en') {
+                    deskEn.className = "px-3 py-1 text-xs font-bold bg-cyan-900/50 text-cyan-400 hover:bg-cyan-400 hover:text-black transition";
+                    deskTc.className = "px-3 py-1 text-xs font-bold text-gray-500 hover:bg-cyan-400 hover:text-black transition";
+                } else {
+                    deskEn.className = "px-3 py-1 text-xs font-bold text-gray-500 hover:bg-cyan-400 hover:text-black transition";
+                    deskTc.className = "px-3 py-1 text-xs font-bold bg-cyan-900/50 text-cyan-400 hover:bg-cyan-400 hover:text-black transition";
+                }
+            }
+
+            // Update buttons style (Mobile)
+            const mobEn = document.getElementById('langEnMob');
+            const mobTc = document.getElementById('langTcMob');
+
+            if (mobEn && mobTc) {
+                if(lang === 'en') {
+                    mobEn.className = "text-xs font-bold text-cyan-400 border border-cyan-400 px-3 py-2 transition-colors";
+                    mobTc.className = "text-xs font-bold text-gray-500 border border-gray-700 px-3 py-2 transition-colors";
+                } else {
+                    mobEn.className = "text-xs font-bold text-gray-500 border border-gray-700 px-3 py-2 transition-colors";
+                    mobTc.className = "text-xs font-bold text-cyan-400 border border-cyan-400 px-3 py-2 transition-colors";
+                }
+            }
+
+            // Update text
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[key] && translations[key][lang]) {
+                    if (element.innerHTML.includes('<') && !element.hasAttribute('data-text')) {
+                         element.innerHTML = translations[key][lang];
+                    } else if (element.classList.contains('glitch-text')) {
+                        element.setAttribute('data-text', translations[key][lang].replace(/<[^>]*>?/gm, ''));
+                        element.innerHTML = translations[key][lang];
+                    } else {
+                        element.innerText = translations[key][lang];
+                    }
+                }
+            });
+        }
+
+        // Mobile Menu Logic
+        function toggleMobileMenu() {
+            const container = document.getElementById('mobileMenuContainer');
+            const overlay = document.getElementById('mobileMenuOverlay');
+            const drawer = document.getElementById('mobileMenuDrawer');
+            
+            if (container.classList.contains('hidden')) {
+                // Open
+                container.classList.remove('hidden');
+                void container.offsetWidth; // Force reflow
+                
+                overlay.classList.remove('opacity-0');
+                drawer.classList.remove('translate-x-full');
+                document.body.style.overflow = 'hidden';
+            } else {
+                // Close
+                overlay.classList.add('opacity-0');
+                drawer.classList.add('translate-x-full');
+                document.body.style.overflow = '';
+                
                 setTimeout(() => {
-                    const stream = document.createElement('div');
-                    stream.className = 'data-stream';
-                    stream.style.left = Math.random() * 100 + '%';
-                    stream.style.animationDelay = Math.random() * 2 + 's';
-                    document.body.appendChild(stream);
-                    
-                    setTimeout(() => {
-                        stream.remove();
-                    }, 3000);
-                }, i * 4000);
+                    container.classList.add('hidden');
+                }, 300);
             }
         }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            // Optimized cosmic particles - reduce frequency and complexity
-            function createCosmicParticles() {
-                for (let i = 0; i < 3; i++) {
-                    setTimeout(() => {
-                        const particle = document.createElement('div');
-                        particle.style.cssText = `
-                            position: absolute;
-                            width: 2px;
-                            height: 2px;
-                            background: rgba(0, 255, 157, 0.6);
-                            border-radius: 50%;
-                            left: ${Math.random() * 100}%;
-                            top: 100%;
-                            z-index: 1;
-                            animation: simpleFloat 15s linear infinite;
-                            pointer-events: none;
-                        `;
-                        
-                        document.querySelector('.hero').appendChild(particle);
-                        
-                        setTimeout(() => {
-                            particle.remove();
-                        }, 15000);
-                    }, i * 5000);
-                }
-            }
-            
-            // Simplified float animation
-            const simpleFloatKeyframes = `
-                @keyframes simpleFloat {
-                    0% { 
-                        transform: translateY(0) scale(0);
-                        opacity: 0;
-                    }
-                    10% {
-                        opacity: 1;
-                        transform: translateY(-10vh) scale(1);
-                    }
-                    90% {
-                        opacity: 1;
-                        transform: translateY(-90vh) scale(0.8);
-                    }
-                    100% { 
-                        transform: translateY(-100vh) scale(0);
-                        opacity: 0;
-                    }
-                }
-            `;
-            
-            // Add the simplified keyframes to the existing style
-            const existingStyle = document.querySelector('style');
-            if (existingStyle) {
-                existingStyle.textContent += simpleFloatKeyframes;
-            }
-            
-            // Start optimized cosmic particles with longer intervals
-            createCosmicParticles();
-            setInterval(createCosmicParticles, 45000);
-            
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                        
-                        // Close mobile menu if open
-                        const mobileMenu = document.querySelector('.mobile-menu');
-                        if (mobileMenu.classList.contains('open')) {
-                            mobileMenu.classList.remove('open');
-                            document.body.style.overflow = 'auto';
-                        }
-                    }
-                });
-            });
-            
-            // Mobile menu functionality
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const mobileMenuClose = document.querySelector('.mobile-menu-close');
-            
-            mobileMenuBtn?.addEventListener('click', () => {
-                mobileMenu.classList.add('open');
-                document.body.style.overflow = 'hidden';
-            });
-            
-            mobileMenuClose?.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Scroll to top functionality
-            const scrollToTopBtn = document.getElementById('scrollToTop');
-            scrollToTopBtn?.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-            
-            // Optimized parallax effect with performance check
-            let ticking = false;
-            window.addEventListener('scroll', () => {
-                if (!ticking) {
-                    requestAnimationFrame(() => {
-                        const scrolled = window.pageYOffset;
-                        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                        const scrolledPercent = (winScroll / height) * 100;
-                        
-                        // Update progress bar
-                        progressBar.style.width = scrolledPercent + '%';
-                        
-                        // Show/hide scroll to top button
-                        if (winScroll > 300) {
-                            scrollToTopBtn.style.display = 'flex';
-                        } else {
-                            scrollToTopBtn.style.display = 'none';
-                        }
-                        
-                        // Simplified parallax only on desktop
-                        if (window.innerWidth > 768) {
-                            const parallax = document.querySelector('.hero-bg');
-                            if (parallax && scrolled < window.innerHeight) {
-                                const speed = scrolled * 0.3;
-                                parallax.style.transform = `translateY(${speed}px)`;
-                            }
-                        }
-                        
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            });
-            
-            // Add scroll animations
-            const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-right, .animate-slide-left');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0) translateX(0) scale(1)';
-                    }
-                });
-            }, { 
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-            
-            animatedElements.forEach(el => {
-                el.style.opacity = '0';
-                el.style.transition = 'all 0.8s ease-out';
-                
-                if (el.classList.contains('animate-slide-up')) {
-                    el.style.transform = 'translateY(50px)';
-                } else if (el.classList.contains('animate-slide-right')) {
-                    el.style.transform = 'translateX(-50px)';
-                } else if (el.classList.contains('animate-slide-left')) {
-                    el.style.transform = 'translateX(50px)';
-                } else if (el.classList.contains('animate-fade-in')) {
-                    el.style.transform = 'scale(0.95)';
-                }
-                
-                observer.observe(el);
-            });
-            
-            // Zone card hover effects
-            document.querySelectorAll('.zone-card').forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.02)';
-                    this.style.boxShadow = '0 20px 40px rgba(0, 255, 157, 0.3)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1)';
-                    this.style.boxShadow = 'none';
-                });
-            });
-            
-            // Stats counter animation
-            function animateCounter(element, target, duration = 2000) {
-                let start = 0;
-                const increment = target / (duration / 16);
-                
-                const timer = setInterval(() => {
-                    start += increment;
-                    if (start >= target) {
-                        start = target;
-                        clearInterval(timer);
-                    }
+
+        // Zone Modal Logic
+        function openZoneModal(zoneId) {
+            const data = zoneDetails[zoneId];
+            if (!data) return;
+
+            const modal = document.getElementById('zoneModal');
+            const modalBody = document.getElementById('modalBody');
+            const lang = currentLang;
+
+            modalBody.innerHTML = `
+                <div class="flex flex-col gap-6">
+                    <h2 class="font-cyber text-3xl font-bold text-white mb-2 border-b border-cyan-500 pb-4">${data.title[lang]}</h2>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">${data.desc[lang]}</p>
                     
-                    if (target >= 1000000000) {
-                        element.textContent = Math.floor(start / 100000000) / 10 + '億';
-                    } else if (target >= 10000) {
-                        element.textContent = Math.floor(start / 10000) + '萬';
-                    } else {
-                        element.textContent = Math.floor(start);
-                    }
-                }, 16);
+                    <h4 class="font-bold text-cyan-400 mb-2">KEY FEATURES</h4>
+                    <ul class="space-y-3 mb-6">
+                        ${data.features[lang].map(feat => `
+                            <li class="flex items-start gap-3 bg-gray-900/50 p-3 rounded border border-gray-800">
+                                <i class="fas fa-caret-right text-purple-400 mt-1"></i>
+                                <span class="text-sm text-gray-400">${feat}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
+                    
+                    <div class="flex gap-4">
+                        <button class="w-full btn-cyber py-3 font-bold" onclick="closeZoneModal()">ENTER SIMULATION</button>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.remove('pointer-events-none');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeZoneModal() {
+            const modal = document.getElementById('zoneModal');
+            modal.classList.remove('active');
+            modal.classList.add('pointer-events-none');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        document.getElementById('zoneModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeZoneModal();
             }
-            
-            // Trigger counter animation when stats come into view
-            const statsObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !entry.target.dataset.animated) {
-                        const numbers = entry.target.querySelectorAll('.number');
-                        numbers.forEach(num => {
-                            const text = num.textContent;
-                            let target = 0;
-                            
-                            if (text.includes('億')) {
-                                target = parseFloat(text) * 1000000000;
-                            } else if (text.includes('萬')) {
-                                target = parseFloat(text) * 10000;
-                            } else {
-                                target = parseInt(text);
-                            }
-                            
-                            if (target > 0) {
-                                animateCounter(num, target);
-                            }
-                        });
-                        entry.target.dataset.animated = 'true';
-                    }
-                });
-            });
-            
-            document.querySelectorAll('.stats-card').forEach(card => {
-                statsObserver.observe(card);
-            });
-            
-            // Investment inquiry modal simulation
-            document.querySelectorAll('a[href="#invest"], .btn-primary').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    if (this.textContent.includes('投資') || this.getAttribute('href') === '#invest') {
-                        e.preventDefault();
-                        alert('感謝您對World404項目的關注！我們的投資顧問將很快與您聯繫。\n\n聯繫方式：\n電話：+86-571-XXXX-XXXX\n郵箱：investment@world404.com');
-                    }
-                });
-            });
-            
-            // Tech feature hover effects
-            document.querySelectorAll('.tech-feature').forEach(feature => {
-                feature.addEventListener('mouseenter', function() {
-                    this.style.backgroundColor = 'rgba(0, 255, 157, 0.05)';
-                    this.style.borderLeftColor = '#00ff9d';
-                    this.style.transform = 'translateX(10px)';
-                });
-                
-                feature.addEventListener('mouseleave', function() {
-                    this.style.backgroundColor = 'rgba(26, 32, 44, 0.5)';
-                    this.style.borderLeftColor = '#00ff9d';
-                    this.style.transform = 'translateX(0)';
-                });
-            });
-            
-            // Remove separate parallax effect since it's now integrated above
-            
-            // Newsletter subscription
-            document.querySelector('input[type="email"]')?.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    const email = this.value;
-                    if (email && email.includes('@')) {
-                        alert('感謝訂閱World404項目動態！我們將及時向您發送最新資訊。');
-                        this.value = '';
-                    } else {
-                        alert('請輸入有效的電子郵箱地址。');
-                    }
-                }
-            });
         });
-        
-        // Add CSS transitions for better performance
-        const style = document.createElement('style');
-        style.textContent = `
-            .card, .zone-card, .tech-feature {
-                transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-                will-change: transform;
-            }
-            
-            .stats-card .number {
-                transition: all 0.3s ease;
-            }
-            
-            /* Reduce animations on mobile for performance */
-            @media (max-width: 768px) {
-                .hero-bg {
-                    animation: none !important;
-                    background: #0f0f23 !important;
-                }
-                
-                .hero:before {
-                    animation: none !important;
-                }
-                
-                .data-stream {
-                    display: none;
-                }
-                
-                * {
-                    will-change: auto !important;
-                }
-            }
-            
-            /* Preload optimization */
-            .zone-card {
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
